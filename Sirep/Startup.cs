@@ -28,10 +28,20 @@ namespace Sirep
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                //.AddDefaultTokenProviders()
+                .AddDefaultUI()
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(options => {
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/Login";
+                //options.AccessDeniedPath = "/Usuario/Account/AccessDenied";
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -63,8 +73,11 @@ namespace Sirep
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("Admin", "Admin", "{controller=Admin}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("Centro", "Centro", "{controller=Centro}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }
