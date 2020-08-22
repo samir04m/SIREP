@@ -31,7 +31,7 @@ namespace Sirep
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                //.AddDefaultTokenProviders()
+                .AddDefaultTokenProviders()
                 .AddDefaultUI()
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

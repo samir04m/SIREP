@@ -53,19 +53,52 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+/*html {
   position: relative;
   min-height: 100%;
-}
+}*/
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /*margin-bottom: 60px;*/
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-.footer {
+main {
+    flex: 1 0 auto;
+}
+/*.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px; 
+}*/
+
+.bg-body {
+    background-color: #f1f1f1;
+}
+
+.bg-a {
+    background-color: #e4e4e4;
+}
+
+.img-footer {
+    height: 90px;
+}
+
+.fz-10 {
+    font-size: 10px;
+}
+
+.fz-15 {
+    font-size: 15px;
+}
+
+.fz-20 {
+    font-size: 20px;
+}
+
+.fz-25 {
+    font-size: 25px;
 }
