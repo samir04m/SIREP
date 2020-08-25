@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -38,5 +39,11 @@ namespace Sirep.Areas.Admin.Models
         [Display(Name = "Rol del usuario")]
         [Required(ErrorMessage = "Seleccione un rol para el usuario.")]
         public string Role { get; set; }
+
+        public string ID { get; set; }
+
+        public int Id { get; set; }
+
+        public IdentityUser IdentityUser { get; set; }
     }
 }
