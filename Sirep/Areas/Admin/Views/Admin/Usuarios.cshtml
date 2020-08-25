@@ -11,53 +11,43 @@
         <i class="fas fa-user-plus"></i> Agregar usuario
     </a>
 </h4>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">NID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Rol</th>
-            @*<th scope="col">Telefono</th>*@
-            @*<th scope="col">Estado</th>*@
-            <th scope="col">Acción</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table id="mytable" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">NID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <th>@Html.DisplayFor(modelItem => item.NID)</th>
-                <td>@Html.DisplayFor(modelItem => item.Name) </td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                 <td>@Html.DisplayFor(modelItem => item.IdentityUser.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.Role)</td>
-                @*<td>@Html.DisplayFor(modelItem => item.IdentityUser.PhoneNumber)</td>*@
-                @*<td>
-                    @if (item.IdentityUser.LockoutEnabled)
-                    {
-                        <p class="text-success">Activo</p>
-                    }
-                    else
-                    {
-                        <p class="text-danger">Bloqueado</p>
-                    }
-                </td>*@
                 <td class="py-2">
-                    <a class="btn btn-outline-info btn-sm" href="/Admin/Usuario/Details/@item.Id">
-                        <i class="far fa-eye"></i>
-                    </a>
-                    <a class="btn btn-outline-success btn-sm" href="/Admin/Usuario/Update/@item.Id">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <a class="btn btn-outline-danger btn-sm" href="/Admin/Usuario/Delete/@item.Id">
-                        <i class="far fa-trash-alt"></i>
-                    </a>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a class="btn btn-outline-info btn-sm" href="/Admin/Usuario/Details/@item.Id">
+                            <i class="far fa-eye"></i>
+                        </a>
+                        <a class="btn btn-outline-success btn-sm" href="/Admin/Usuario/Update/@item.Id">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" href="/Admin/Usuario/Delete/@item.Id">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </div>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+</div>
 
