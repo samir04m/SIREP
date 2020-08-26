@@ -63,9 +63,9 @@
                 <div class="text-center">
                     <form asp-area="Admin" asp-page="UsuarioForm" method="post">
                         @{
-                            var data = JsonConvert.SerializeObject(Model.Input.Data);
+                            var dataUser = JsonConvert.SerializeObject(Model.Input.Data);
                         }
-                        <input type="hidden" name="dataUser" value="@data" />
+                        <input type="hidden" name="dataUser" value="@dataUser" />
                         <input type="submit" value="Editar" class="btn btn-success px-4">
                     </form>
                 </div>

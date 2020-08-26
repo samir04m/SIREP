@@ -25,6 +25,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         private static InputModel _dataInput;
         private IWebHostEnvironment _environment;
         private static UsuarioInputModel _dataUser1, _dataUser2;
+        private static int idLastUserCreated = 0;
 
         public UsuarioFormModel (
             UserManager<IdentityUser> userManager,
@@ -42,12 +43,38 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         }
 
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-            if (_dataInput != null)
+            _dataUser2 = null;
+           
+            if (_dataInput != null || _dataUser1 != null || _dataUser2 != null)
             {
-                Input = _dataInput;
-                Input.rolesLista = _userRoles.getRoles(_roleManager);
+                if (_dataInput != null)
+                {
+                    Input = _dataInput;
+                    Input.rolesLista = _userRoles.getRoles(_roleManager);
+                }
+                else
+                {
+                    if (_dataUser1 != null || _dataUser2 != null)
+                    {
+                        if (_dataUser2 != null) _dataUser1 = _dataUser2;
+                        Input = new InputModel
+                        {
+                            Id = _dataUser1.Id,
+                            Name = _dataUser1.Name,
+                            LastName = _dataUser1.LastName,
+                            NID = _dataUser1.NID,
+                            Email = _dataUser1.IdentityUser.Email,
+                            PhoneNumber = _dataUser1.IdentityUser.PhoneNumber,
+                            rolesLista = getRoles(_dataUser1.Role),
+                        };
+                        if (_dataInput != null)
+                        {
+                            Input.ErrorMessage = _dataInput.ErrorMessage;
+                        }
+                    }
+                }
             }
             else
             {
@@ -56,13 +83,15 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                     rolesLista = _userRoles.getRoles(_roleManager)
                 };
             }
+            _dataUser2 = _dataUser1;
+            _dataUser1 = null;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel : UsuarioInputModel
         {
-            //[TempData]
+            [TempData]
             public string ErrorMessage { get; set; }
             public List<SelectListItem> rolesLista { get; set; }
         }
@@ -71,13 +100,35 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         {
             if (dataUser == null)
             {
-                if (await SaveAsync())
+                if (_dataUser2 == null)
                 {
-                    return Redirect("/Admin/Usuarios");
+                    if (await SaveAsync())
+                    {
+                        if (!idLastUserCreated.Equals(0))
+                        {
+                            var url = $"/Admin/Usuario/Details?id={idLastUserCreated}";
+                            idLastUserCreated = 0;
+                            return Redirect(url);
+                        }
+                        return Redirect("/Admin/Usuarios");
+                    }
+                    else
+                    {
+                        return Redirect("/Admin/Usuarios/Form");
+                    }
                 }
                 else
                 {
-                    return Redirect("/Admin/Usuarios/Form");
+                    if (await UpdateAsync())
+                    {
+                        var url = $"/Admin/Usuario/Details?id={_dataUser2.Id}";
+                        _dataUser2 = null;
+                        return Redirect(url);
+                    }
+                    else
+                    {
+                        return Redirect("/Admin/Usuarios");
+                    }
                 }
             }
             else
@@ -123,6 +174,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                                     await _context.AddAsync(t_usuario);
                                     _context.SaveChanges();
                                     transaction.Commit();
+                                    idLastUserCreated = t_usuario.ID;
                                     _dataInput = null;
                                     valor = true;
                                 }
@@ -163,6 +215,73 @@ namespace Sirep.Areas.Admin.Pages.Usuario
 
             return valor;
         }
+
+        private List<SelectListItem> getRoles(String role)
+        {
+            List<SelectListItem> rolesLista = new List<SelectListItem>();
+            rolesLista.Add(new SelectListItem
+            {
+                Text = role
+            });
+            var roles = _userRoles.getRoles(_roleManager);
+            roles.ForEach(item => {
+                if (item.Text != role)
+                {
+                    rolesLista.Add(new SelectListItem
+                    {
+                        Text = item.Text
+                    });
+                }
+            });
+            return rolesLista;
+        }
+
+        private async Task<bool> UpdateAsync()
+        {
+            var valor = false;
+            var strategy = _context.Database.CreateExecutionStrategy();
+            await strategy.ExecuteAsync(async () => {
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var identityUser = _userManager.Users.Where(u => u.Id.Equals(_dataUser2.ID)).ToList().Last();
+                        identityUser.UserName = Input.Email;
+                        identityUser.Email = Input.Email;
+                        identityUser.PhoneNumber = Input.PhoneNumber;
+                        _context.Update(identityUser);
+                        await _context.SaveChangesAsync();
+
+                        var t_user = new TUsuarios
+                        {
+                            ID = _dataUser2.Id,
+                            Nombre = Input.Name,
+                            Apellido = Input.LastName,
+                            NID = Input.NID,
+                            IdUser = _dataUser2.ID,
+                        };
+                        _context.Update(t_user);
+                        _context.SaveChanges();
+                        if (_dataUser2.Role != Input.Role)
+                        {
+                            await _userManager.RemoveFromRoleAsync(identityUser, _dataUser2.Role);
+                            await _userManager.AddToRoleAsync(identityUser, Input.Role);
+                        }
+                        transaction.Commit();
+                        valor = true;
+                    }
+                    catch (Exception ex)
+                    {
+
+                        _dataInput.ErrorMessage = ex.Message;
+                        transaction.Rollback();
+                        valor = false;
+                    }
+                }
+            });
+            return valor;
+        }
+
 
 
     }

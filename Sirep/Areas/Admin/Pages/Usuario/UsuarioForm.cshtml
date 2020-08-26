@@ -1,14 +1,23 @@
 ﻿@page "/Admin/Usuarios/Form"
 @model UsuarioFormModel
 @{
-    ViewData["Title"] = "Formulario de Usuario";
+    string palabra = (Model.Input.Id.Equals(0)) ? "Creación" : "Edición";
+    ViewData["Title"] = $"{palabra} de Usuario";
 }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Admin/Inicio">Panel de Administración</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/Usuarios">Lista de Usuarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@palabra de Usuario</li>
+    </ol>
+</nav>
 
 <div class="row">
     <div class="col-sm-12 offset-lg-3 col-lg-6">
         <div class="card rounded shadow">
             <div class="card-body">
-                <h5 class="text-center mb-4">Registro de Usuarios</h5>
+                <h5 class="text-center mb-4">@palabra de Usuario</h5>
                 <form method="post" enctype="multipart/form-data" autocomplete="off">
                     @if (Model.Input.ErrorMessage != null)
                     {

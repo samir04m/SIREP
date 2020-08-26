@@ -16,7 +16,6 @@ namespace Sirep.Areas.Admin.Controllers
         private SignInManager<IdentityUser> _signInManager;
         private LUsuario usuarios;
 
-
         public AdminController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
@@ -40,10 +39,12 @@ namespace Sirep.Areas.Admin.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                Object[] objects = new Object[3];
                 var data = usuarios.getUsuariosAsync(null, 0);
-                
-                return View(data.Result);
+                if (0 < data.Result.Count)
+                {
+                    return View(data.Result);
+                }
+                return View();
             }
             else
             {
