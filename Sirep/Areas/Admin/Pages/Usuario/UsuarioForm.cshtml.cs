@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Sirep.Areas.Admin.Models;
 using Sirep.Data;
 using Sirep.Library;
@@ -23,6 +24,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         private LUsuariosRoles _userRoles;
         private static InputModel _dataInput;
         private IWebHostEnvironment _environment;
+        private static UsuarioInputModel _dataUser1, _dataUser2;
 
         public UsuarioFormModel (
             UserManager<IdentityUser> userManager,
@@ -65,15 +67,23 @@ namespace Sirep.Areas.Admin.Pages.Usuario
             public List<SelectListItem> rolesLista { get; set; }
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(String dataUser)
         {
-            if (await SaveAsync())
+            if (dataUser == null)
             {
-                return Redirect("/Admin/Usuarios");
+                if (await SaveAsync())
+                {
+                    return Redirect("/Admin/Usuarios");
+                }
+                else
+                {
+                    return Redirect("/Admin/Usuarios/Form");
+                }
             }
             else
             {
-                return Redirect("/Admin/Usuarios/Form");
+                _dataUser1 = JsonConvert.DeserializeObject<UsuarioInputModel>(dataUser);
+                return Redirect("/Admin/Usuarios/Form?id=1");
             }
         }
 

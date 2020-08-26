@@ -1,0 +1,75 @@
+﻿@page "/Admin/Usuario/Details"
+@model UsuarioDetailsModel
+@{
+    ViewData["Title"] = "Detalles de Usuario";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Admin/Inicio">Panel de Administración</a></li>
+        <li class="breadcrumb-item"><a href="/Admin/Usuarios">Lista de Usuarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detalles de Usuario</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-8">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h5>Detalles del Usuario</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Nombre</span>
+                        <h5>@Model.Input.Data.Name</h5>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Apellido</span>
+                        <h5>@Model.Input.Data.LastName</h5>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Número de Identificación</span>
+                        @if (Model.Input.Data.NID == null)
+                        {
+                            <br /><span class="text-muted">(No definido)</span>
+                        } 
+                        else
+                        {
+                            <h5>@Model.Input.Data.NID</h5>
+                        }
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Correo electrónico</span>
+                        <h5>@Model.Input.Data.IdentityUser.Email</h5>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Número de Teléfono</span>
+                        @if (Model.Input.Data.IdentityUser.PhoneNumber == null)
+                        {
+                            <br /><span class="text-muted">(No definido)</span>
+                        }
+                        else
+                        {
+                            <h5>@Model.Input.Data.IdentityUser.PhoneNumber</h5>
+                        }
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-4">
+                        <span>Rol</span>
+                        <h5>@Model.Input.Data.Role</h5>
+                    </div>
+
+                </div>
+                <div class="text-center">
+                    <form asp-area="Admin" asp-page="UsuarioForm" method="post">
+                        @{
+                            var data = JsonConvert.SerializeObject(Model.Input.Data);
+                        }
+                        <input type="hidden" name="dataUser" value="@data" />
+                        <input type="submit" value="Editar" class="btn btn-success px-4">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
