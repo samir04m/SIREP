@@ -26,26 +26,31 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <th>@Html.DisplayFor(modelItem => item.NID)</th>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdentityUser.Email)</td>
-                <td>@Html.DisplayFor(modelItem => item.Role)</td>
-                <td class="py-2">
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                <tr>
+                    <th>@Html.DisplayFor(modelItem => item.NID)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdentityUser.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                    <td class="py-2">
                         <a class="btn btn-outline-info btn-sm" href="/Admin/Usuario/Details?id=@item.Id">
                             <i class="far fa-eye"></i>
                         </a>
-                        <a class="btn btn-outline-success btn-sm" href="/Admin/Usuario/Update?id=@item.Id">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a class="btn btn-outline-danger btn-sm" href="/Admin/Usuario/Delete?id=@item.Id">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
+                        @{
+                            var dataUser = JsonConvert.SerializeObject(item);
+                        }
+                        <form method="post" action="/Admin/Usuarios/Form" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="dataUser" value="@dataUser" />
+                            <button type="submit" class="btn btn-outline-success btn-sm"><i class="far fa-edit"></i></button>
+                        </form>
+                        <form method="post" action="/Admin/Usuario/Delete" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="entidad_string" value="@dataUser" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

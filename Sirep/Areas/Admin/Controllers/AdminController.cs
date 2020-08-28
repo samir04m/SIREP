@@ -11,6 +11,7 @@ using Sirep.Library;
 namespace Sirep.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private SignInManager<IdentityUser> _signInManager;
@@ -27,14 +28,12 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [Route("/Admin/Inicio")]
-        [Authorize(Roles = "Admin")]
         public IActionResult AdminIndex()
         {
             return View();
         }
 
         [Route("/Admin/Usuarios")]
-        [Authorize(Roles = "Admin")]
         public IActionResult Usuarios()
         {
             if (_signInManager.IsSignedIn(User))
@@ -51,7 +50,6 @@ namespace Sirep.Areas.Admin.Controllers
                 return Redirect("/");
             }
         }
-
 
     }
 }

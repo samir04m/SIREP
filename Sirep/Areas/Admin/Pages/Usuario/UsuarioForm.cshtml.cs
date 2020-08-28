@@ -45,8 +45,8 @@ namespace Sirep.Areas.Admin.Pages.Usuario
 
         public void OnGet(int id)
         {
-            _dataUser2 = null;
-           
+            _dataUser2 = null;  
+            
             if (_dataInput != null || _dataUser1 != null || _dataUser2 != null)
             {
                 if (_dataInput != null)
@@ -281,8 +281,6 @@ namespace Sirep.Areas.Admin.Pages.Usuario
             });
             return valor;
         }
-
-
 
     }
 }
