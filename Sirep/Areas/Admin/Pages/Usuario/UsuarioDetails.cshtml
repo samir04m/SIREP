@@ -61,12 +61,16 @@
 
                 </div>
                 <div class="text-center">
-                    <form asp-area="Admin" asp-page="UsuarioForm" method="post">
-                        @{
-                            var dataUser = JsonConvert.SerializeObject(Model.Input.Data);
-                        }
-                        <input type="hidden" name="dataUser" value="@dataUser" />
-                        <input type="submit" value="Editar" class="btn btn-success px-4">
+                    @{
+                        var usuario_string = JsonConvert.SerializeObject(Model.Input.Data);
+                    }
+                    <form asp-area="Admin" asp-page="UsuarioForm" method="post" class="d-inline">
+                        <input type="hidden" name="dataUser" value="@usuario_string" />
+                        <button type="submit" class="btn btn-success"><i class="far fa-edit"></i> Editar</button>
+                    </form>
+                    <form asp-area="Admin" asp-page="UsuarioDelete" method="post" class="d-inline">
+                        <input type="hidden" name="usuario_string" value="@usuario_string" />
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</button>
                     </form>
                 </div>
             </div>

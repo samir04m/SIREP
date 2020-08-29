@@ -141,7 +141,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         private async Task<bool> SaveAsync()
         {
             _dataInput = Input;
-            var valor = false;
+            var respuesta = false;
             if (ModelState.IsValid)
             {
                 var userList = _userManager.Users.Where(u => u.Email.Equals(Input.Email)).ToList();
@@ -176,7 +176,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                                     transaction.Commit();
                                     idLastUserCreated = t_usuario.ID;
                                     _dataInput = null;
-                                    valor = true;
+                                    respuesta = true;
                                 }
                                 else
                                 {
@@ -184,7 +184,6 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                                     {
                                         _dataInput.ErrorMessage = item.Description;
                                     }
-                                    valor = false;
                                     transaction.Rollback();
                                 }
                             }
@@ -198,7 +197,6 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                 else
                 {
                     _dataInput.ErrorMessage = $"El {Input.Email} ya esta registrado";
-                    valor = false;
                 }
             }
             else
@@ -210,10 +208,8 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                         _dataInput.ErrorMessage += error.ErrorMessage;
                     }
                 }
-                valor = false;
             }
-
-            return valor;
+            return respuesta;
         }
 
         private List<SelectListItem> getRoles(String role)
@@ -238,7 +234,7 @@ namespace Sirep.Areas.Admin.Pages.Usuario
 
         private async Task<bool> UpdateAsync()
         {
-            var valor = false;
+            var respuesta = false;
             var strategy = _context.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () => {
                 using (var transaction = _context.Database.BeginTransaction())
@@ -246,8 +242,15 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                     try
                     {
                         var identityUser = _userManager.Users.Where(u => u.Id.Equals(_dataUser2.ID)).ToList().Last();
-                        identityUser.UserName = Input.Email;
-                        identityUser.Email = Input.Email;
+                        var existeEmail = _userManager.Users.Where(u => u.Email.Equals(Input.Email) &&
+                                                                        !u.Id.Equals(_dataUser2.ID)).FirstOrDefault();
+                        if (existeEmail == null)
+                        {
+                            identityUser.UserName = Input.Email;
+                            identityUser.NormalizedUserName = Input.Email.ToUpper();
+                            identityUser.Email = Input.Email;
+                            identityUser.NormalizedEmail = Input.Email.ToUpper();
+                        }
                         identityUser.PhoneNumber = Input.PhoneNumber;
                         _context.Update(identityUser);
                         await _context.SaveChangesAsync();
@@ -268,18 +271,18 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                             await _userManager.AddToRoleAsync(identityUser, Input.Role);
                         }
                         transaction.Commit();
-                        valor = true;
+                        respuesta = true;
                     }
                     catch (Exception ex)
                     {
 
                         _dataInput.ErrorMessage = ex.Message;
                         transaction.Rollback();
-                        valor = false;
+                        respuesta = false;
                     }
                 }
             });
-            return valor;
+            return respuesta;
         }
 
     }

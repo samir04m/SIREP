@@ -4,7 +4,7 @@
     ViewData["Title"] = "Eliminar Usuario";
 }
 
-@if(Model.Input.Data.Id != 0)
+@if (Model.Input.Data.Id != 0)
 {
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8">
@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <h5>Eliminar registro</h5>
                     <hr />
-                    <p>¿Está seguro que desea eliminar este usuario <b>(@Model.Input.Data.Name @Model.Input.Data.LastName)</b> de forma permanente?</p>
+                    <p>¿Está seguro que desea eliminar al usuario <b>@Model.Input.Data.IdentityUser.Email</b> de forma permanente?</p>
                     <p class="text-danger">*Esta acción no se puede deshacer*</p>
                     <form asp-area="Admin" asp-page="UsuarioDelete" method="post">
                         <input type="hidden" name="confirmacion" value="1" />
@@ -27,7 +27,19 @@
 }
 else
 {
-    <h4 class="py-4">No hay ningún recurso para mostrar.</h4>
+    @if (Model.Input.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <b>Se encontraron los siguentes errores al intentar borrar el registro.</b>
+            <hr />
+            @Model.Input.ErrorMessage
+        </div>
+    }
+    else
+    {
+        <h4 class="py-4">No hay ningún recurso para mostrar.</h4>
+    }
+
     <a href="/Admin/Usuarios" class="btn btn-outline-secondary px-4"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
-    
+
 }

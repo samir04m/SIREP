@@ -37,16 +37,16 @@
                             <i class="far fa-eye"></i>
                         </a>
                         @{
-                            var dataUser = JsonConvert.SerializeObject(item);
+                            var usuario_string = JsonConvert.SerializeObject(item);
                         }
                         <form method="post" action="/Admin/Usuarios/Form" class="d-inline">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="dataUser" value="@dataUser" />
+                            <input type="hidden" name="dataUser" value="@usuario_string" />
                             <button type="submit" class="btn btn-outline-success btn-sm"><i class="far fa-edit"></i></button>
                         </form>
                         <form method="post" action="/Admin/Usuario/Delete" class="d-inline">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="entidad_string" value="@dataUser" />
+                            <input type="hidden" name="usuario_string" value="@usuario_string" />
                             <button type="submit" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>

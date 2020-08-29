@@ -18,12 +18,15 @@ namespace Sirep.Areas.Admin.Pages.Usuario
         private ApplicationDbContext _context;
         private static UsuarioInputModel _user1, _user2;
         private TUsuarios tusuario;
+        private static String errorMessage;
 
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel
         {
             public UsuarioInputModel Data { get; set; }
+            [TempData]
+            public string ErrorMessage { get; set; }
         }
 
         public UsuarioDeleteModel (
@@ -41,14 +44,19 @@ namespace Sirep.Areas.Admin.Pages.Usuario
             {
                 Data = _user1,
             };
+            if (errorMessage != null) 
+            {
+                Input.ErrorMessage = errorMessage;
+                errorMessage = null;
+            }
             _user1 = new UsuarioInputModel();
         }
 
-        public async Task<IActionResult> OnPost(String entidad_string = null, int confirmacion = 0)
+        public async Task<IActionResult> OnPost(String usuario_string = null, int confirmacion = 0)
         {
-            if (entidad_string != null && _user1.Id.Equals(0))
+            if (usuario_string != null && _user1.Id.Equals(0))
             {
-                _user1 = JsonConvert.DeserializeObject<UsuarioInputModel>(entidad_string);
+                _user1 = JsonConvert.DeserializeObject<UsuarioInputModel>(usuario_string);
                 _user2 = _user1;
             }
             if (!confirmacion.Equals(0) && _user2 != null)
@@ -82,20 +90,36 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                                 if (result2.Succeeded)
                                 {
                                     tusuario = _context.Usuarios.Find(_user2.Id);
-                                    _context.Usuarios.Remove(tusuario);
-                                    _context.SaveChanges();
-                                    transaction.Commit();
-                                    _user1 = new UsuarioInputModel();
-                                    _user2 = null;
-                                    respuesta = true;
+                                    if (tusuario != null)
+                                    {
+                                        _context.Usuarios.Remove(tusuario);
+                                        _context.SaveChanges();
+                                        transaction.Commit();
+                                        _user1 = new UsuarioInputModel();
+                                        _user2 = null;
+                                        respuesta = true;
+                                    }
+                                    else
+                                    {
+                                        errorMessage = $"No se encontró al usuarios ( {_user2.Name} {_user2.Name} ) en la base de datos.";
+                                        transaction.Rollback();
+                                    }
                                 }
                                 else
                                 {
+                                    foreach (var item in result.Errors)
+                                    {
+                                        errorMessage = item.Description;
+                                    }
                                     transaction.Rollback();
                                 }
                             }
                             else
                             {
+                                foreach (var item in result.Errors)
+                                {
+                                    errorMessage = item.Description;
+                                }
                                 transaction.Rollback();
                             }
                         }
@@ -105,6 +129,10 @@ namespace Sirep.Areas.Admin.Pages.Usuario
                         }
                     }
                 });
+            }
+            else
+            {
+                errorMessage = $"El usuario {_user2.IdentityUser.Email} no está en la base de datos.";
             }
             return respuesta;
         }
