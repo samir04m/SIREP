@@ -37,7 +37,6 @@ namespace Sirep.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(RepresentanteLegal representante)
         {
-
             if (ModelState.IsValid)
             {
                 _context.RepresentantesLegales.Add(representante);
@@ -45,10 +44,7 @@ namespace Sirep.Areas.Admin.Controllers
 
                 return RedirectToAction("Details", new { id = representante.Id });
             }
-            else
-            {
-                return View(representante);
-            }
+            return View(representante);
         }
 
         public ActionResult Edit(int? id)
@@ -66,7 +62,6 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(RepresentanteLegal representante)
         {
             if (ModelState.IsValid)

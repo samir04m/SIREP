@@ -1,16 +1,15 @@
 ﻿@model Sirep.Models.RepresentanteLegal
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Representante Legal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h3>Detalles del Representante Legal</h3>
 
 <div>
-    <h4>RepresentanteLegal</h4>
     <hr />
-    <dl class="row">
+    <dl class="row fz-20">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NID)
         </dt>
@@ -36,8 +35,9 @@
             @Html.DisplayFor(model => model.Telefono)
         </dd>
     </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Representantes">Back to List</a>
+<div class="text-center">
+    <a asp-action="Representantes" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
 </div>
