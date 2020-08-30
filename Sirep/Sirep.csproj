@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-Sirep-01CCBCE9-1DDA-418D-9DFC-774CEFE4414C</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200830024528_Migration3.cs" />
+    <Compile Remove="Data\Migrations\20200830024528_Migration3.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200830041905_Migration4.cs" />
+    <Compile Remove="Data\Migrations\20200830041905_Migration4.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.3" />
