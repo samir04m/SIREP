@@ -43,11 +43,13 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="DepartamentoId" class="control-label"></label>
-                            <select asp-for="DepartamentoId" class="form-control" asp-items="ViewBag.DepartamentoId"></select>
+                            <select asp-for="DepartamentoId" class="form-control selectpicker" 
+                                    data-live-search="true" asp-items="ViewBag.DepartamentoId"></select>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="RepresentanteLegalId" class="control-label"></label>
-                            <select asp-for="RepresentanteLegalId" class="form-control" asp-items="ViewBag.RepresentanteLegalId"></select>
+                            <select asp-for="RepresentanteLegalId" class="form-control selectpicker" 
+                                    data-live-search="true" asp-items="ViewBag.RepresentanteLegalId"></select>
                         </div>
                     </div>
                     <div class="form-group text-center">
