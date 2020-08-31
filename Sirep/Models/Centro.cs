@@ -11,33 +11,34 @@ namespace Sirep.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido.")]
         [StringLength(100)]
         public string Nombre { get; set; }
 
         [StringLength(30)]
-        public string Codigo { get; set; }
+        [Display(Name = "NID")]
+        public string NID { get; set; }
 
         [StringLength(30)]
+        [Display(Name = "Teléfono")]
+        [DataType(DataType.PhoneNumber)]
         public string Telefono { get; set; }
 
-        [StringLength(100)]
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
+        [Display(Name = "Corregimiento / Vereda")]
         public string Lugar { get; set; }
 
-        [StringLength(100)]
-        public string Administrador { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido.")]
+        [Display(Name = "Departamento")]
         public int DepartamentoId { get; set; }
 
+        [Display(Name = "Representante Legal")]
         public int RepresentanteLegalId { get; set; }
-
-        public virtual IEnumerable<Reproductor> Reproductores { get; set; }
-
-        public virtual IEnumerable<PermisoCentro> PermisoCentros { get; set; } 
 
         [ForeignKey("DepartamentoId")]
         public virtual Departamento Departamento { get; set; }
@@ -45,5 +46,10 @@ namespace Sirep.Models
         [ForeignKey("RepresentanteLegalId")]
         public virtual RepresentanteLegal RepresentanteLegal { get; set; }
 
+        public virtual IEnumerable<Lote> Lotes { get; set; }
+
+        public virtual IEnumerable<CentroUsuario> CentroUsuarios { get; set; }
+
+        public virtual IEnumerable<PermisoCentro> PermisoCentros { get; set; }
     }
 }

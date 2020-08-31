@@ -13,7 +13,7 @@ namespace Sirep.Models
         [StringLength(50)]
         public string Codigo { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido.")]
         [StringLength(50)]
         public string Nombre { get; set; }
 

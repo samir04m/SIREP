@@ -17,7 +17,7 @@ namespace Sirep.Models
         [Required]
         public byte[] Imagen { get; set; }
 
-        public int Numero { get; set; }
+        public int? Numero { get; set; }
 
         [ForeignKey("ReproductorId")]
         public virtual Reproductor Reproductor { get; set; }

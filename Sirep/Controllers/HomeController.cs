@@ -41,7 +41,7 @@ namespace Sirep.Controllers
         public async Task<IActionResult> CrearRoles()
         {
             await CreateRolesAsync(_serviceProvider);
-            return Redirect("/");
+            return Content("Roles Creados");
         }
 
         private async Task CreateRolesAsync(IServiceProvider serviceProvider)

@@ -19,6 +19,7 @@ namespace Sirep.Data
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<RepresentanteLegal> RepresentantesLegales { get; set; }
         public DbSet<Centro> Centros { get; set; }
+        public DbSet<CentroUsuario> CentroUsuarios { get; set; }
         public DbSet<Institucion> Instituciones { get; set; }
         public DbSet<Permiso> Permisos { get; set; }
         public DbSet<PermisoCentro> PermisoCentros { get; set; }

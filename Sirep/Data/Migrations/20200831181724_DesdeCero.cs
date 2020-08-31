@@ -3,10 +3,42 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sirep.Data.Migrations
 {
-    public partial class Migration3 : Migration
+    public partial class DesdeCero : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "AspNetUserTokens",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserTokens",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "ProviderKey",
+                table: "AspNetUserLogins",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserLogins",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(128)",
+                oldMaxLength: 128);
+
             migrationBuilder.CreateTable(
                 name: "Cuencas",
                 columns: table => new
@@ -43,7 +75,7 @@ namespace Sirep.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Familia = table.Column<string>(maxLength: 50, nullable: false),
                     Orden = table.Column<string>(maxLength: 50, nullable: false),
-                    Codigo = table.Column<string>(maxLength: 30, nullable: true),
+                    Codigo = table.Column<string>(maxLength: 50, nullable: true),
                     NombreComun = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -84,8 +116,8 @@ namespace Sirep.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NID = table.Column<string>(maxLength: 30, nullable: true),
                     Nombre = table.Column<string>(maxLength: 100, nullable: false),
+                    NID = table.Column<string>(maxLength: 30, nullable: true),
                     Email = table.Column<string>(maxLength: 100, nullable: true),
                     Telefono = table.Column<string>(maxLength: 30, nullable: true)
                 },
@@ -95,17 +127,32 @@ namespace Sirep.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(maxLength: 30, nullable: false),
+                    Apellido = table.Column<string>(maxLength: 30, nullable: false),
+                    NID = table.Column<string>(maxLength: 30, nullable: true),
+                    IdUser = table.Column<string>(maxLength: 450, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Centros",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(maxLength: 100, nullable: false),
-                    Codigo = table.Column<string>(maxLength: 30, nullable: true),
+                    NID = table.Column<string>(maxLength: 30, nullable: true),
                     Telefono = table.Column<string>(maxLength: 30, nullable: true),
-                    Direccion = table.Column<string>(maxLength: 100, nullable: true),
-                    Lugar = table.Column<string>(maxLength: 100, nullable: true),
-                    Administrador = table.Column<string>(maxLength: 100, nullable: true),
+                    Direccion = table.Column<string>(maxLength: 50, nullable: false),
+                    Lugar = table.Column<string>(maxLength: 50, nullable: true),
                     DepartamentoId = table.Column<int>(nullable: false),
                     RepresentanteLegalId = table.Column<int>(nullable: false)
                 },
@@ -127,12 +174,38 @@ namespace Sirep.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CentroUsuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CentroId = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CentroUsuarios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CentroUsuarios_Centros_CentroId",
+                        column: x => x.CentroId,
+                        principalTable: "Centros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CentroUsuarios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lotes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(maxLength: 100, nullable: false),
+                    Nombre = table.Column<string>(maxLength: 30, nullable: false),
                     Detalles = table.Column<string>(maxLength: 200, nullable: true),
                     CentroId = table.Column<int>(nullable: false)
                 },
@@ -186,23 +259,16 @@ namespace Sirep.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChipId = table.Column<string>(maxLength: 10, nullable: false),
+                    ChipId = table.Column<string>(maxLength: 20, nullable: false),
                     FechaIngreso = table.Column<DateTime>(nullable: false),
-                    LugarProcedencia = table.Column<string>(maxLength: 100, nullable: true),
+                    LugarProcedencia = table.Column<string>(maxLength: 100, nullable: false),
                     EspecieId = table.Column<int>(nullable: false),
                     LoteId = table.Column<int>(nullable: false),
-                    CuencaId = table.Column<int>(nullable: false),
-                    CentroId = table.Column<int>(nullable: true)
+                    CuencaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reproductores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reproductores_Centros_CentroId",
-                        column: x => x.CentroId,
-                        principalTable: "Centros",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reproductores_Cuencas_CuencaId",
                         column: x => x.CuencaId,
@@ -241,8 +307,8 @@ namespace Sirep.Data.Migrations
                     PS = table.Column<double>(nullable: false),
                     UREA = table.Column<double>(nullable: false),
                     GLS = table.Column<double>(nullable: false),
-                    RBC = table.Column<double>(nullable: false),
-                    WBC = table.Column<double>(nullable: false),
+                    RBC = table.Column<double>(nullable: true),
+                    WBC = table.Column<double>(nullable: true),
                     Observaciones = table.Column<string>(maxLength: 100, nullable: true),
                     Ojos = table.Column<string>(maxLength: 100, nullable: true),
                     Piel = table.Column<string>(maxLength: 100, nullable: true),
@@ -268,7 +334,7 @@ namespace Sirep.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReproductorId = table.Column<int>(nullable: false),
                     Imagen = table.Column<byte[]>(nullable: false),
-                    Numero = table.Column<int>(nullable: false)
+                    Numero = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -290,6 +356,16 @@ namespace Sirep.Data.Migrations
                 name: "IX_Centros_RepresentanteLegalId",
                 table: "Centros",
                 column: "RepresentanteLegalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CentroUsuarios_CentroId",
+                table: "CentroUsuarios",
+                column: "CentroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CentroUsuarios_UsuarioId",
+                table: "CentroUsuarios",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DatosReproductores_ReproductorId",
@@ -322,11 +398,6 @@ namespace Sirep.Data.Migrations
                 column: "PermisoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reproductores_CentroId",
-                table: "Reproductores",
-                column: "CentroId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reproductores_CuencaId",
                 table: "Reproductores",
                 column: "CuencaId");
@@ -345,6 +416,9 @@ namespace Sirep.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CentroUsuarios");
+
+            migrationBuilder.DropTable(
                 name: "DatosReproductores");
 
             migrationBuilder.DropTable(
@@ -352,6 +426,9 @@ namespace Sirep.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "PermisoCentros");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Reproductores");
@@ -379,6 +456,38 @@ namespace Sirep.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "RepresentantesLegales");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "AspNetUserTokens",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string));
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserTokens",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string));
+
+            migrationBuilder.AlterColumn<string>(
+                name: "ProviderKey",
+                table: "AspNetUserLogins",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string));
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LoginProvider",
+                table: "AspNetUserLogins",
+                type: "nvarchar(128)",
+                maxLength: 128,
+                nullable: false,
+                oldClrType: typeof(string));
         }
     }
 }

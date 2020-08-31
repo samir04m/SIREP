@@ -12,11 +12,14 @@ namespace Sirep.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(20)]
         public string ChipId { get; set; }
 
+        [Display(Name = "Fecha de Ingreso")]
         public DateTime FechaIngreso { get; set; }
 
+        [Required]
+        [Display(Name = "Lugar de procedencia")]
         [StringLength(100)]
         public string LugarProcedencia { get; set; }
 
@@ -26,7 +29,6 @@ namespace Sirep.Models
         [Required]
         public int LoteId { get; set; }
 
-        [Required]
         public int CuencaId { get; set; }
 
         public virtual IEnumerable<DatosReproductor> Datos { get; set; }

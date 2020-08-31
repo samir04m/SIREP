@@ -36,9 +36,9 @@ namespace Sirep.Models
 
         public double GLS { get; set; }
 
-        public double RBC { get; set; }
+        public double? RBC { get; set; }
 
-        public double WBC { get; set; }
+        public double? WBC { get; set; }
 
         [StringLength(100)]
         public string Observaciones { get; set; }

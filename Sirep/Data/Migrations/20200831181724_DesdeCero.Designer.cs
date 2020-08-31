@@ -10,8 +10,8 @@ using Sirep.Data;
 namespace Sirep.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200830042509_Migration3")]
-    partial class Migration3
+    [Migration("20200831181724_DesdeCero")]
+    partial class DesdeCero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -225,16 +225,23 @@ namespace Sirep.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("IdUser")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.Property<string>("NID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("ID");
 
@@ -248,24 +255,21 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Administrador")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Codigo")
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
-
                     b.Property<int>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Lugar")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NID")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -286,6 +290,28 @@ namespace Sirep.Data.Migrations
                     b.HasIndex("RepresentanteLegalId");
 
                     b.ToTable("Centros");
+                });
+
+            modelBuilder.Entity("Sirep.Models.CentroUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CentroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CentroId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("CentroUsuarios");
                 });
 
             modelBuilder.Entity("Sirep.Models.Cuenca", b =>
@@ -360,7 +386,7 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<double>("RBC")
+                    b.Property<double?>("RBC")
                         .HasColumnType("float");
 
                     b.Property<int>("ReproductorId")
@@ -375,7 +401,7 @@ namespace Sirep.Data.Migrations
                     b.Property<double>("UREA")
                         .HasColumnType("float");
 
-                    b.Property<double>("WBC")
+                    b.Property<double?>("WBC")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -415,8 +441,8 @@ namespace Sirep.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Familia")
                         .IsRequired()
@@ -449,7 +475,7 @@ namespace Sirep.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("Numero")
+                    b.Property<int?>("Numero")
                         .HasColumnType("int");
 
                     b.Property<int>("ReproductorId")
@@ -495,8 +521,8 @@ namespace Sirep.Data.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -589,13 +615,10 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CentroId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ChipId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("CuencaId")
                         .HasColumnType("int");
@@ -610,12 +633,11 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LugarProcedencia")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CentroId");
 
                     b.HasIndex("CuencaId");
 
@@ -692,6 +714,21 @@ namespace Sirep.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sirep.Models.CentroUsuario", b =>
+                {
+                    b.HasOne("Sirep.Models.Centro", "Centro")
+                        .WithMany("CentroUsuarios")
+                        .HasForeignKey("CentroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sirep.Areas.Admin.Models.TUsuarios", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Sirep.Models.DatosReproductor", b =>
                 {
                     b.HasOne("Sirep.Models.Reproductor", "Reproductor")
@@ -713,7 +750,7 @@ namespace Sirep.Data.Migrations
             modelBuilder.Entity("Sirep.Models.Lote", b =>
                 {
                     b.HasOne("Sirep.Models.Centro", "Centro")
-                        .WithMany()
+                        .WithMany("Lotes")
                         .HasForeignKey("CentroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -742,10 +779,6 @@ namespace Sirep.Data.Migrations
 
             modelBuilder.Entity("Sirep.Models.Reproductor", b =>
                 {
-                    b.HasOne("Sirep.Models.Centro", null)
-                        .WithMany("Reproductores")
-                        .HasForeignKey("CentroId");
-
                     b.HasOne("Sirep.Models.Cuenca", "Cuenca")
                         .WithMany("Reproductores")
                         .HasForeignKey("CuencaId")
