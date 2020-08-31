@@ -35,6 +35,7 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Especie especie)
         {
             if (ModelState.IsValid)
@@ -62,6 +63,7 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Especie especie)
         {
             if (ModelState.IsValid)

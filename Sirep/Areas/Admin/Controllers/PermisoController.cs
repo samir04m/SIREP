@@ -12,19 +12,19 @@ namespace Sirep.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class RepresentanteController : Controller
+    public class PermisoController : Controller
     {
         private ApplicationDbContext _context;
 
-        public RepresentanteController(ApplicationDbContext context)
+        public PermisoController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [Route("/Admin/Representantes")]
-        public IActionResult Representantes()
+        [Route("/Admin/Permisos")]
+        public IActionResult Permisos()
         {
-            var lista = _context.RepresentantesLegales.ToList();
+            var lista = _context.Permisos.ToList();
             return View(lista);
         }
 
@@ -36,16 +36,16 @@ namespace Sirep.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RepresentanteLegal representante)
+        public ActionResult Create(Permiso permiso)
         {
             if (ModelState.IsValid)
             {
-                _context.RepresentantesLegales.Add(representante);
+                _context.Permisos.Add(permiso);
                 _context.SaveChanges();
 
-                return RedirectToAction("Details", new { id = representante.Id });
+                return RedirectToAction("Details", new { id = permiso.Id });
             }
-            return View(representante);
+            return View(permiso);
         }
 
         public ActionResult Edit(int? id)
@@ -54,25 +54,25 @@ namespace Sirep.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            if (representante == null)
+            Permiso permiso = _context.Permisos.Find(id);
+            if (permiso == null)
             {
                 return NotFound();
             }
-            return View(representante);
+            return View(permiso);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RepresentanteLegal representante)
+        public ActionResult Edit(Permiso permiso)
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(representante).State = EntityState.Modified;
+                _context.Entry(permiso).State = EntityState.Modified;
                 _context.SaveChanges();
-                return RedirectToAction("Details", new { id = representante.Id });
+                return RedirectToAction("Details", new { id = permiso.Id });
             }
-            return View(representante);
+            return View(permiso);
         }
 
         public ActionResult Details(int? id)
@@ -81,12 +81,12 @@ namespace Sirep.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            if (representante == null)
+            Permiso permiso = _context.Permisos.Find(id);
+            if (permiso == null)
             {
                 return NotFound();
             }
-            return View(representante);
+            return View(permiso);
         }
 
         public ActionResult Delete(int? id)
@@ -95,23 +95,22 @@ namespace Sirep.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            if (representante == null)
+            Permiso permiso = _context.Permisos.Find(id);
+            if (permiso == null)
             {
                 return NotFound();
             }
-            return View(representante);
+            return View(permiso);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            _context.RepresentantesLegales.Remove(representante);
+            Permiso permiso = _context.Permisos.Find(id);
+            _context.Permisos.Remove(permiso);
             _context.SaveChanges();
-            return RedirectToAction("Representantes");
+            return RedirectToAction("Permisos");
         }
-
     }
 }

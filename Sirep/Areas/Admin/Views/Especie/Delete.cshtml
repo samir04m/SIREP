@@ -36,6 +36,7 @@
         </dd>
     </dl>
     <form asp-action="Delete">
+        @Html.AntiForgeryToken()
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Si, Eliminar" class="btn btn-danger px-4" />
     </form>

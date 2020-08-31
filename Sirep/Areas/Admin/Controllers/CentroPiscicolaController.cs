@@ -41,6 +41,7 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Centro centro)
         {
             if (ModelState.IsValid)
@@ -70,6 +71,7 @@ namespace Sirep.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Centro centro)
         {
             if (ModelState.IsValid)
@@ -120,7 +122,7 @@ namespace Sirep.Areas.Admin.Controllers
             Centro centro = _context.Centros.Find(id);
             _context.Centros.Remove(centro);
             _context.SaveChanges();
-            return RedirectToAction("Representantes");
+            return RedirectToAction("Centros");
         }
 
     }

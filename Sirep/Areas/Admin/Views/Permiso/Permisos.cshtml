@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Sirep.Models.Permiso>
+
+@{
+    ViewData["Title"] = "Permisos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Gestión de Permisos</h2>
+<hr />
+<h4 class="mt-5 mb-3 text-center">
+    Lista de Especies
+    <a class="btn btn-primary mx-3" asp-action="Create">
+        <i class="fas fa-user-plus"></i> Agregar Permiso
+    </a>
+</h4>
+
+<div class="table-responsive">
+    <table class="table table-hover" id="mytable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                            <i class="far fa-eye"></i>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
