@@ -1,0 +1,72 @@
+﻿@model Sirep.Models.Centro
+
+@{
+    ViewData["Title"] = "Editar Centro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h5 class="m-0">Editar Centro Piscícola</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Codigo" class="control-label"></label>
+                            <input asp-for="Codigo" class="form-control" />
+                            <span asp-validation-for="Codigo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Telefono" class="control-label"></label>
+                            <input asp-for="Telefono" class="form-control" />
+                            <span asp-validation-for="Telefono" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Direccion" class="control-label"></label>
+                            <input asp-for="Direccion" class="form-control" />
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Lugar" class="control-label"></label>
+                            <input asp-for="Lugar" class="form-control" />
+                            <span asp-validation-for="Lugar" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Administrador" class="control-label"></label>
+                            <input asp-for="Administrador" class="form-control" />
+                            <span asp-validation-for="Administrador" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DepartamentoId" class="control-label"></label>
+                            <select asp-for="DepartamentoId" class="form-control" asp-items="ViewBag.DepartamentoId"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="RepresentanteLegalId" class="control-label"></label>
+                            <select asp-for="RepresentanteLegalId" class="form-control" asp-items="ViewBag.RepresentanteLegalId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Guardar cambios" class="btn btn-success px-4" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <a asp-action="Centros" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

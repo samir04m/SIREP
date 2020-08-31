@@ -1,0 +1,71 @@
+﻿@model Sirep.Models.Centro
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Eliminar Registro</h3>
+<hr />
+<div>
+    <h4 class="mb-4">¿Está seguro que quierer eliminar este registro?</h4>
+    <dl class="row lh-25">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Lugar)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Lugar)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Administrador)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Administrador)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Departamento)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Departamento.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.RepresentanteLegal)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.RepresentanteLegal.Nombre)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Si, Eliminar" class="btn btn-danger px-4" />
+    </form>
+</div>
+
+<div class="text-center my-4">
+    <a asp-action="Centros" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+</div>

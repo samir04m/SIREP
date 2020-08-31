@@ -1,0 +1,67 @@
+﻿@model Sirep.Models.Centro
+
+@{
+    ViewData["Title"] = "Detalles del Centro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Detalles del Centro Piscícola</h3>
+
+<div>
+    <hr />
+    <dl class="row lh-25">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Lugar)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Lugar)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Administrador)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Administrador)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Departamento)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Departamento.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.RepresentanteLegal)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.RepresentanteLegal.Nombre)
+        </dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+</div>
+<div class="text-center my-4">
+    <a asp-action="Centros" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+</div>

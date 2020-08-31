@@ -26,8 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Centro\Data\" />
-    <Folder Include="Areas\Centro\Models\" />
   </ItemGroup>
 
 </Project>

@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Sirep.Models.RepresentanteLegal>
+﻿@model IEnumerable<Sirep.Models.Centro>
 
 @{
-    ViewData["Title"] = "Representantes";
+    ViewData["Title"] = "Centros";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2> Gestión de Representantes Legales</h2>
+<h2> Gestión de Centros Piscícolas</h2>
 <hr />
 <h4 class="mt-5 mb-3 text-center">
-    Lista de Representantes
+    Lista de Centros
     <a class="btn btn-primary mx-3" asp-action="Create">
-        <i class="fas fa-user-plus"></i> Agregar Representante
+        <i class="fas fa-user-plus"></i> Agregar Centro
     </a>
 </h4>
 
@@ -19,16 +19,16 @@
         <thead>
             <tr>
                 <th>
-                   NID
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Email)
+                    Teléfono
                 </th>
                 <th>
-                    Teléfono
+                    @Html.DisplayNameFor(model => model.Administrador)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Departamento)
                 </th>
                 <th></th>
             </tr>
@@ -38,24 +38,24 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NID)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Telefono)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" >
+                        @Html.DisplayFor(modelItem => item.Administrador)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
                             <i class="far fa-eye"></i>
-                        </a> 
+                        </a>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
                             <i class="far fa-edit"></i>
-                        </a> 
+                        </a>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
                         </a>
