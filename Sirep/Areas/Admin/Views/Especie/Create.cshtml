@@ -1,0 +1,52 @@
+﻿@model Sirep.Models.Especie
+
+@{
+    ViewData["Title"] = "Crear Especie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-3 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h5 class="m-0">Crear Especie</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Familia" class="control-label"></label>
+                        <input asp-for="Familia" class="form-control" />
+                        <span asp-validation-for="Familia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Orden" class="control-label"></label>
+                        <input asp-for="Orden" class="form-control" />
+                        <span asp-validation-for="Orden" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label"></label>
+                        <input asp-for="Codigo" class="form-control" />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NombreComun" class="control-label"></label>
+                        <input asp-for="NombreComun" class="form-control" />
+                        <span asp-validation-for="NombreComun" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center m-0">
+                        <input type="submit" value="Crear" class="btn btn-primary px-4" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <a asp-action="Especies" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

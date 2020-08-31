@@ -19,10 +19,12 @@ namespace Sirep.Models
         public string Orden { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Código")]
         public string Codigo { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Nombre Común")]
         public string NombreComun { get; set; }
 
         public virtual IEnumerable<Reproductor> Reproductores { get; set; }
