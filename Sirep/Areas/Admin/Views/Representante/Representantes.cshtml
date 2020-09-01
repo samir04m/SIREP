@@ -50,15 +50,25 @@
                         @Html.DisplayFor(modelItem => item.Telefono)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" >
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
                             <i class="far fa-eye"></i>
-                        </a> 
+                        </a>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
                             <i class="far fa-edit"></i>
-                        </a> 
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
-                            <i class="far fa-trash-alt"></i>
                         </a>
+                        @if (item.Centros.Count() > 0)
+                        {
+                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="popover" title="No se puede eliminar"
+                                    data-content="No es posible eliminar este registro porque esta relacionado con @item.Centros.Count() Centros Piscícolas.">
+                                        <i class="far fa-trash-alt"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        }
                     </td>
                 </tr>
             }

@@ -10,33 +10,43 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-4">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.NID)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.NID)
         </dd>
-        <dt class = "col-sm-4">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-4">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-4">
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Telefono)
         </dt>
-        <dd class = "col-sm-8">
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Telefono)
         </dd>
     </dl>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+    @if (Model.Centros.Count() > 0)
+    {
+    <button type="button" class="btn btn-outline-secondary" data-toggle="popover" title="No se puede eliminar"
+            data-content="No es posible eliminar este registro porque esta relacionado con @Model.Centros.Count() Centros Piscícolas.">
+                <i class="far fa-trash-alt"></i> Eliminar
+    </button>
+    }
+    else
+    {
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+    }
 </div>
 <div class="text-center my-4">
     <a asp-action="Representantes" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>

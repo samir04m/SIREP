@@ -7,4 +7,5 @@ $(document).ready(function () {
     $('#mytable').DataTable({
         "aaSorting": []
     });
+    $('[data-toggle="popover"]').popover();
 });

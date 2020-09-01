@@ -24,7 +24,7 @@ namespace Sirep.Areas.Admin.Controllers
         [Route("/Admin/Representantes")]
         public IActionResult Representantes()
         {
-            var lista = _context.RepresentantesLegales.ToList();
+            var lista = _context.RepresentantesLegales.Include("Centros").ToList();
             return View(lista);
         }
 
@@ -81,7 +81,7 @@ namespace Sirep.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
+            RepresentanteLegal representante = _context.RepresentantesLegales.Include("Centros").Where(x => x.Id == id).FirstOrDefault();
             if (representante == null)
             {
                 return NotFound();
@@ -91,15 +91,14 @@ namespace Sirep.Areas.Admin.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            if (representante == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return BadRequest();
+            
+            RepresentanteLegal representante = _context.RepresentantesLegales.Include("Centros").Where(x => x.Id == id).FirstOrDefault();
+            
+            if (representante == null) return NotFound();
+
+            if (representante.Centros.Count() > 0) return RedirectToAction("Details", new { id = representante.Id });
+
             return View(representante);
         }
 
@@ -107,9 +106,12 @@ namespace Sirep.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RepresentanteLegal representante = _context.RepresentantesLegales.Find(id);
-            _context.RepresentantesLegales.Remove(representante);
-            _context.SaveChanges();
+            RepresentanteLegal representante = _context.RepresentantesLegales.Include("Centros").Where(x => x.Id == id).FirstOrDefault();
+            if (representante.Centros.Count() == 0)
+            {
+                _context.RepresentantesLegales.Remove(representante);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Representantes");
         }
 

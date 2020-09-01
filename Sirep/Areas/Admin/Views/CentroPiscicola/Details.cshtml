@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-8">
         <div class="card shadow mb-3">
+            <div class="card-header text-center"><b>Información del Centro</b></div>
             <div class="card-body">
                 <dl class="row lh-25">
                     <dt class="col-sm-4">
@@ -96,7 +97,9 @@
                 @foreach (var item in Model.PermisoCentros)
                 {
                     <li class="list-group-item py-2">
-                        @item.Permiso.Nombre
+                        <button type="button" class="btn btn-link text-dark p-0" data-toggle="popover" title="Institución otorgante" data-content="@item.Institucion.Nombre">
+                            @item.Permiso.Nombre
+                        </button>
                         <form asp-action="RemovePermiso" class="d-inline-block float-right">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="CentroId" value="@Model.Id" />
