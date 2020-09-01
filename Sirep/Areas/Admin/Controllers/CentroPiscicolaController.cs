@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Sirep.Areas.Admin.Models;
 using Sirep.Data;
 using Sirep.Library;
 using Sirep.Models;
@@ -91,11 +92,15 @@ namespace Sirep.Areas.Admin.Controllers
             }
             Centro centro = _context.Centros
                                     .Include("Departamento").Include("RepresentanteLegal")
+                                    .Include("CentroUsuarios").Include("PermisoCentros")
                                     .Where(x => x.Id == id).FirstOrDefault();
             if (centro == null)
             {
                 return NotFound();
             }
+            ViewBag.Usuarios = _selectList.UsuariosCentroSelectList(centro.CentroUsuarios);
+            ViewBag.Permisos = _selectList.PermisosSelectList();
+            ViewBag.Instituciones = _selectList.InstitucionesSelectList();
             return View(centro);
         }
 
@@ -124,6 +129,82 @@ namespace Sirep.Areas.Admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Centros");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUsuario(int CentroId, int UsuarioId)
+        {
+            if (!CentroId.Equals(0) && !UsuarioId.Equals(0))
+            {
+                var centro = _context.Centros.Find(CentroId);
+                var usuario = _context.Usuarios.Find(UsuarioId);
+                if (centro != null && usuario != null)
+                {
+                    CentroUsuario centrousuario = new CentroUsuario();
+                    centrousuario.CentroId = CentroId;
+                    centrousuario.UsuarioId = UsuarioId;
+                    _context.Add(centrousuario);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = CentroId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveUsuario(int CentroId, int CentroUsuarioId)
+        {
+            if (!CentroUsuarioId.Equals(0))
+            {
+                var centrousuario = _context.CentroUsuarios.Find(CentroUsuarioId);
+                if (centrousuario != null)
+                {
+                    _context.Remove(centrousuario);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = CentroId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPermiso(int CentroId, int PermisoId, int InstitucionId)
+        {
+            if (!CentroId.Equals(0) && !PermisoId.Equals(0) && !InstitucionId.Equals(0))
+            {
+                var centro = _context.Centros.Find(CentroId);
+                var permiso = _context.Permisos.Find(PermisoId);
+                var institucion = _context.Permisos.Find(InstitucionId);
+                if (centro != null && permiso != null && institucion != null)
+                {
+                    PermisoCentro permisoCentro = new PermisoCentro();
+                    permisoCentro.CentroId = CentroId;
+                    permisoCentro.PermisoId = PermisoId;
+                    permisoCentro.InstitucionId = InstitucionId;
+                    _context.Add(permisoCentro);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = CentroId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemovePermiso(int CentroId, int PermisoCentroId)
+        {
+            if (!PermisoCentroId.Equals(0))
+            {
+                var permisoCentro = _context.PermisoCentros.Find(PermisoCentroId);
+                if (permisoCentro != null)
+                {
+                    _context.Remove(permisoCentro);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = CentroId });
+        }
+
+
 
     }
 }

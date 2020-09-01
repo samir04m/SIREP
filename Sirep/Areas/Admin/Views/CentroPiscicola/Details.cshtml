@@ -6,56 +6,175 @@
 }
 
 <h3>Detalles del Centro Piscícola</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-lg-8">
+        <div class="card shadow mb-3">
+            <div class="card-body">
+                <dl class="row lh-25">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.NID)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.NID)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Telefono)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Direccion)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Direccion)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Lugar)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lugar)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Departamento)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Departamento.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.RepresentanteLegal)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.RepresentanteLegal.Nombre)
+                    </dd>
+                </dl>
+                <div class="text-center">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <div class="card shadow border-primary mb-3">
+            <div class="card-header text-center py-2 text-light bg-primary">
+                <b>Administradores</b>
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var item in Model.CentroUsuarios)
+                {
+                    <li class="list-group-item py-2">
+                        @item.Usuario.Nombre @item.Usuario.Apellido
+                        <form asp-action="RemoveUsuario" class="d-inline-block float-right">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="CentroId" value="@Model.Id" />
+                            <input type="hidden" name="CentroUsuarioId" value="@item.Id" />
+                            <button type="submit" class="btn btn-link text-danger p-0"><i class="fas fa-times-circle fa-lg"></i></button>
+                        </form>
+                    </li>
+                }
+                <li class="list-group-item text-center">
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#addUsuarioModal">
+                        <i class="fas fa-user-plus"></i> Agregar Admin
+                    </button>
+                </li>
+            </ul>
+        </div>
 
-<div>
-    <hr />
-    <dl class="row lh-25">
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.NID)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.NID)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Lugar)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Lugar)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Departamento)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Departamento.Nombre)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.RepresentanteLegal)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.RepresentanteLegal.Nombre)
-        </dd>
-    </dl>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+        <div class="card shadow border-info mb-3">
+            <div class="card-header text-center py-2 text-light bg-info">
+                <b>Permisos del Centro</b>
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var item in Model.PermisoCentros)
+                {
+                    <li class="list-group-item py-2">
+                        @item.Permiso.Nombre
+                        <form asp-action="RemovePermiso" class="d-inline-block float-right">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="CentroId" value="@Model.Id" />
+                            <input type="hidden" name="PermisoCentroId" value="@item.Id" />
+                            <button type="submit" class="btn btn-link text-danger p-0"><i class="fas fa-times-circle fa-lg"></i></button>
+                        </form>
+
+                    </li>
+                 }
+                <li class="list-group-item text-center">
+                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#addPermisoModal">
+                        <i class="fas fa-file-powerpoint"></i> Agregar Permiso
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+
 <div class="text-center my-4">
     <a asp-action="Centros" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
 </div>
+
+<div class="modal fade" id="addUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="addUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="addUsuarioModalLabel">Agregar Administrador al Centro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="AddUsuario">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="CentroId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="UsuarioId">Usuario Administrador</label>
+                        @Html.DropDownList("UsuarioId", new SelectList(ViewBag.Usuarios, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addPermisoModal" tabindex="-1" role="dialog" aria-labelledby="addPermisoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="addPermisoModalLabel">Agregar Permiso al Centro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="AddPermiso">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="CentroId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="PermisoId">Permiso</label>
+                        @Html.DropDownList("PermisoId", new SelectList(ViewBag.Permisos, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true" })
+                    </div>
+                    <div class="form-group">
+                        <label for="InstitucionId">Institución otorgante</label>
+                        @Html.DropDownList("InstitucionId", new SelectList(ViewBag.Instituciones, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
