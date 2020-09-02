@@ -1,0 +1,41 @@
+﻿@model Sirep.Models.Lote
+
+@{
+    ViewData["Title"] = "Eliminar Regitro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Eliminar Registro</h3>
+<hr />
+<div>
+    <h4 class="mb-4">¿Está seguro que quierer eliminar este registro?</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Detalles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Detalles)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Centro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Centro.Nombre)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Si, Eliminar" class="btn btn-danger px-4" />
+    </form>
+</div>
+
+<div class="text-center my-4">
+    <a href="/Centro/Lotes/@Model.CentroId" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+</div>
