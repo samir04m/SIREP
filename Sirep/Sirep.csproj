@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\CentroAdmin\Data\" />
+    <Folder Include="Areas\CentroAdmin\Models\" />
   </ItemGroup>
 
 

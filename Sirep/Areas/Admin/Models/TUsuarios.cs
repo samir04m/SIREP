@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Sirep.Models;
 
 namespace Sirep.Areas.Admin.Models
 {
@@ -24,5 +25,7 @@ namespace Sirep.Areas.Admin.Models
         [Required]
         [StringLength(450)]
         public string IdUser { get; set; }
+
+        public virtual IEnumerable<CentroUsuario> CentroUsuarios { get; set; }
     }
 }

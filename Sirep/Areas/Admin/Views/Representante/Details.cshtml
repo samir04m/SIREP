@@ -38,10 +38,10 @@
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
     @if (Model.Centros.Count() > 0)
     {
-    <button type="button" class="btn btn-outline-secondary" data-toggle="popover" title="No se puede eliminar"
-            data-content="No es posible eliminar este registro porque esta relacionado con @Model.Centros.Count() Centros Piscícolas.">
-                <i class="far fa-trash-alt"></i> Eliminar
-    </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="popover" title="No se puede eliminar"
+                data-content="No es posible eliminar este registro porque esta relacionado con @Model.Centros.Count() Centros Piscícolas.">
+                    <i class="far fa-trash-alt"></i> Eliminar
+        </button>
     }
     else
     {
