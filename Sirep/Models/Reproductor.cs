@@ -24,12 +24,15 @@ namespace Sirep.Models
         public string LugarProcedencia { get; set; }
 
         [Required]
+        [Display(Name = "Especie")]
         public int EspecieId { get; set; }
 
         [Required]
+        [Display(Name = "Lote")]
         public int LoteId { get; set; }
 
-        public int CuencaId { get; set; }
+        [Display(Name = "Cuenca")]
+        public int? CuencaId { get; set; }
 
         public virtual IEnumerable<DatosReproductor> Datos { get; set; }
 

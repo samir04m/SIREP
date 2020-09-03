@@ -1,0 +1,85 @@
+﻿@model Sirep.Models.Reproductor
+
+@{
+    ViewData["Title"] = "Detalles del Reproductor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles del Reproductor (@Model.ChipId)</h2>
+<hr />
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <dl class="row lh-25">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ChipId)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ChipId)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FechaIngreso)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FechaIngreso)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.LugarProcedencia)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.LugarProcedencia)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Especie)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Especie.Familia) - @Html.DisplayFor(model => model.Especie.NombreComun)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Lote)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lote.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Cuenca)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Cuenca.Nombre)
+                    </dd>
+                </dl>
+                <div class="text-center">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow">
+            <h6 class="card-header bg-primary text-light">Información del Reproductor</h6>
+            <div class="card-body">
+                @if (Model.Datos.Count() == 0)
+                {
+                    <p class="text-center">Aún no se agrego información de este reproductor.</p>
+                    <div class="text-center mt-4">
+                        <a href="/DatosReproductor/Create/@Model.Id" class="btn btn-primary">
+                            Agregar Información <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                }
+                else
+                {
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center my-4">
+    <a href="/Centro/Reproductores/@ViewBag.CentroId" class="btn btn-outline-secondary rounded-pill">
+        <i class="fas fa-arrow-left"></i> Volver al Listado
+    </a>
+</div>

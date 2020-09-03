@@ -24,11 +24,14 @@ namespace Sirep.Areas.CentroAdmin.Controllers
         [Route("/Centro/Lotes/{CentroId}")]
         public IActionResult Lotes(int CentroId)
         {
-            var centro = _context.Centros.Include("Lotes").Where(x => x.Id == CentroId).Single();
+            var centro = _context.Centros.Include("Lotes").Where(x => x.Id == CentroId).FirstOrDefault();
+            int nReproductores = 0;
             foreach (var lote in centro.Lotes.ToList())
             {
                 lote.Reproductores = _context.Reproductores.Where(x => x.LoteId == lote.Id).ToList();
+                nReproductores += lote.Reproductores.Count();
             }
+            ViewBag.cantidadReproductores = nReproductores;
             return View(centro);
         }
 

@@ -124,6 +124,50 @@ namespace Sirep.Library
             return selectList;
         }
 
+        public List<SelectListItem> EspeciesSelectList(bool edit = false)
+        {
+            var selectList = new List<SelectListItem>();
+            if (!edit) selectList.Add(defaultOption);
+            var list = _context.Especies.ToList();
+            list.ForEach(item => {
+                selectList.Add(new SelectListItem
+                {
+                    Value = item.Id + "",
+                    Text = item.Familia+" - "+item.NombreComun
+                });
+            });
+            return selectList;
+        }
+
+        public List<SelectListItem> LotesSelectList(int CentroId, bool edit = false)
+        {
+            var selectList = new List<SelectListItem>();
+            if (!edit) selectList.Add(defaultOption);
+            var list = _context.Lotes.Where(x => x.CentroId == CentroId).ToList();
+            list.ForEach(item => {
+                selectList.Add(new SelectListItem
+                {
+                    Value = item.Id + "",
+                    Text = item.Nombre
+                });
+            });
+            return selectList;
+        }
+
+        public List<SelectListItem> CuencasSelectList(bool edit = false)
+        {
+            var selectList = new List<SelectListItem>();
+            if (!edit) selectList.Add(defaultOption);
+            var list = _context.Cuencas.ToList();
+            list.ForEach(item => {
+                selectList.Add(new SelectListItem
+                {
+                    Value = item.Id + "",
+                    Text = item.Nombre
+                });
+            });
+            return selectList;
+        }
 
     }
 }

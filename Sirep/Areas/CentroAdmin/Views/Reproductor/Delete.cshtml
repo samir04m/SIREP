@@ -1,0 +1,63 @@
+﻿@model Sirep.Models.Reproductor
+
+@{
+    ViewData["Title"] = "Eliminar Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Eliminar Registro</h3>
+<hr />
+<div>
+    <h4 class="mb-4">¿Está seguro que quierer eliminar este registro?</h4>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.ChipId)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.ChipId)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.FechaIngreso)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.FechaIngreso)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.LugarProcedencia)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.LugarProcedencia)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Especie)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Especie.Familia)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Lote)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Lote.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Cuenca)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Cuenca.Nombre)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Si, Eliminar" class="btn btn-danger px-4" />
+    </form>
+</div>
+
+<div class="text-center my-4">
+    <a href="/Centro/Reproductores/@ViewBag.CentroId" class="btn btn-outline-secondary rounded-pill">
+        <i class="fas fa-arrow-left"></i> Volver al Listado
+    </a>
+</div>
+

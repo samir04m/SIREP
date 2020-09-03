@@ -6,62 +6,51 @@
 
 <h2>Gestión de Centros Piscicolas</h2>
 <hr />
+
 @if (Model.Count() > 0)
 {
-    @foreach (var centro in Model)
-    {
-        <div class="card mb-5 shadow">
-            @*<div class="card-header">
-                <h4 class="card-title text-center mb-0">@centro.Nombre</h4>
-            </div>*@
-            <div class="card-body">
-                <h4 class="card-title text-center">@centro.Nombre</h4>
-                <hr />
-                <div class="row p-4">
-                    <div class="col-sm-12 col-lg-6">
-                        <div class="card bg-primary mb-3 shadow">
-                            <div class="card-body py-3">
-                                <div class="row">
-                                    <div class="col-3 text-light text-center">
-                                        <i class="fas fa-map-pin fa-5x"></i>
-                                    </div>
-                                    <div class="col-9 py-2">
-                                        <h5 class="text-light">Gestión de Lotes</h5>
-                                        <div class="text-right">
-                                            <a class="btn btn-outline-light" href="/Centro/Lotes/@centro.Id" role="button">
-                                                Gestionar <i class="fas fa-tasks"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="row">
+        @foreach (var centro in Model)
+        {
+            <div class="col-lg-6">
+                <div class="card shadow border-primary">
+                    <h5 class="card-header bg-primary text-light"> @centro.Nombre </h5>
+
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-5">
+                                Dirección:
+                            </dt>
+                            <dd class="col-sm-5">
+                                @centro.Direccion
+                            </dd>
+                            <dt class="col-sm-5">
+                                Corregimiento/Vereda:
+                            </dt>
+                            <dd class="col-sm-5">
+                                @centro.Lugar
+                            </dd>
+                            <dt class="col-sm-5">
+                                Departamento:
+                            </dt>
+                            <dd class="col-sm-5">
+                                @centro.Departamento.Nombre
+                            </dd>
+                        </dl>
+                        <hr />
+                        <h5>Número de Lotes: <span class="badge badge-primary">@centro.Lotes.Count()</span></h5>
+                        <h5>Número de Reproductores: <span class="badge badge-primary">@ViewBag.cantidadReproductores[centro.Id]</span></h5>
+
+                        <div class="text-right">
+                            <a href="/Centro/Lotes/@centro.Id" class="btn btn-primary">
+                                Gestionar Centro <i class="fas fa-tasks"></i>
+                            </a>
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-lg-6">
-                        <div class="card bg-info mb-3 shadow">
-                            <div class="card-body py-3">
-                                <div class="row">
-                                    <div class="col-3 text-light text-center">
-                                        <i class="fas fa-fish fa-5x"></i>
-                                    </div>
-                                    <div class="col-9 py-2">
-                                        <h5 class="text-light">Gestión de Reproductores</h5>
-                                        <div class="text-right">
-                                            <a class="btn btn-outline-light" href="/Centro/Reproductores/@centro.Id" role="button">
-                                                Gestionar <i class="fas fa-tasks"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 }
 else
 {
