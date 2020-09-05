@@ -370,7 +370,8 @@ namespace Sirep.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DatosReproductores_ReproductorId",
                 table: "DatosReproductores",
-                column: "ReproductorId");
+                column: "ReproductorId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImagenReproductores_ReproductorId",

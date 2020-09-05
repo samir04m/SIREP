@@ -1,0 +1,131 @@
+﻿@model Sirep.Models.DatosReproductor
+
+@{
+    ViewData["Title"] = "Editar Información";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-primary mb-3" role="alert">
+            <b>Nota:</b> Para ingresar números decimales utilice <b>coma (,)</b> Por ejemplo: 9,47
+        </div>
+
+        <div class="card shadow">
+            <h5 class="card-header text-center">Editar Información del Reproductor (@Model.Reproductor.ChipId)</h5>
+            <div class="card-body">
+                <form asp-action="Edit" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ReproductorId" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Peso" class="control-label"></label>
+                            <input asp-for="Peso" class="form-control" placeholder="Peso en gramos" data-val="false" />
+                            <span asp-validation-for="Peso" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Talla" class="control-label"></label>
+                            <input asp-for="Talla" class="form-control" placeholder="Talla en centímetros" data-val="false" />
+                            <span asp-validation-for="Talla" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Sexo"></label>
+                            <select asp-for="Sexo" class="form-control">
+                                <option value="true">Macho</option>
+                                <option value="false">Hembra</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="HTO" class="control-label"></label>
+                            <input asp-for="HTO" class="form-control" placeholder="Hematocrito" data-val="false" />
+                            <span asp-validation-for="HTO" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="HTOLab" class="control-label"></label>
+                            <input asp-for="HTOLab" class="form-control" placeholder="Hematocrito (Lab)" data-val="false" />
+                            <span asp-validation-for="HTOLab" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="HB" class="control-label"></label>
+                            <input asp-for="HB" class="form-control" placeholder="Hemoglobina" data-val="false" />
+                            <span asp-validation-for="HB" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="PPT" class="control-label"></label>
+                            <input asp-for="PPT" class="form-control" placeholder="Solidos totales en plasma" data-val="false" />
+                            <span asp-validation-for="PPT" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="CSL" class="control-label"></label>
+                            <input asp-for="CSL" class="form-control" placeholder="Cortisol" data-val="false" />
+                            <span asp-validation-for="CSL" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="PS" class="control-label"></label>
+                            <input asp-for="PS" class="form-control" placeholder="Proteína sanguínea" data-val="false" />
+                            <span asp-validation-for="PS" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="UREA" class="control-label"></label>
+                            <input asp-for="UREA" class="form-control" placeholder="UREA sanguínea" data-val="false" />
+                            <span asp-validation-for="UREA" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="GLS" class="control-label"></label>
+                            <input asp-for="GLS" class="form-control" placeholder="Glucosa" data-val="false" />
+                            <span asp-validation-for="GLS" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="RBC" class="control-label"></label>
+                            <input asp-for="RBC" class="form-control" placeholder="Recuento eritrocitario" data-val="false" />
+                            <span asp-validation-for="RBC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="WBC" class="control-label"></label>
+                            <input asp-for="WBC" class="form-control" placeholder="Recuento de glóbulos blancos" data-val="false" />
+                            <span asp-validation-for="WBC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Observaciones" class="control-label"></label>
+                            <input asp-for="Observaciones" class="form-control" />
+                            <span asp-validation-for="Observaciones" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Ojos" class="control-label"></label>
+                            <input asp-for="Ojos" class="form-control" />
+                            <span asp-validation-for="Ojos" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Piel" class="control-label"></label>
+                            <input asp-for="Piel" class="form-control" />
+                            <span asp-validation-for="Piel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Aleta" class="control-label"></label>
+                            <input asp-for="Aleta" class="form-control" />
+                            <span asp-validation-for="Aleta" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="Branquias" class="control-label"></label>
+                            <input asp-for="Branquias" class="form-control" />
+                            <span asp-validation-for="Branquias" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-0">
+                        <input type="submit" value="Guardar cambios" class="btn btn-success px-4" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <a href="/Reproductor/Details/@Model.ReproductorId" class="btn btn-outline-secondary rounded-pill">
+                <i class="fas fa-arrow-left"></i> Volver a Detalles del Reproductor
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

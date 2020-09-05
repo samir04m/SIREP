@@ -10,7 +10,7 @@ using Sirep.Data;
 namespace Sirep.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200831181724_DesdeCero")]
+    [Migration("20200904214959_DesdeCero")]
     partial class DesdeCero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -406,7 +406,8 @@ namespace Sirep.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReproductorId");
+                    b.HasIndex("ReproductorId")
+                        .IsUnique();
 
                     b.ToTable("DatosReproductores");
                 });
@@ -723,7 +724,7 @@ namespace Sirep.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Sirep.Areas.Admin.Models.TUsuarios", "Usuario")
-                        .WithMany()
+                        .WithMany("CentroUsuarios")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -732,8 +733,8 @@ namespace Sirep.Data.Migrations
             modelBuilder.Entity("Sirep.Models.DatosReproductor", b =>
                 {
                     b.HasOne("Sirep.Models.Reproductor", "Reproductor")
-                        .WithMany("Datos")
-                        .HasForeignKey("ReproductorId")
+                        .WithOne("Datos")
+                        .HasForeignKey("Sirep.Models.DatosReproductor", "ReproductorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

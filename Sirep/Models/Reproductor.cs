@@ -15,6 +15,7 @@ namespace Sirep.Models
         [StringLength(20)]
         public string ChipId { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de Ingreso")]
         public DateTime FechaIngreso { get; set; }
 
@@ -32,9 +33,9 @@ namespace Sirep.Models
         public int LoteId { get; set; }
 
         [Display(Name = "Cuenca")]
-        public int? CuencaId { get; set; }
+        public int CuencaId { get; set; }
 
-        public virtual IEnumerable<DatosReproductor> Datos { get; set; }
+        public virtual DatosReproductor Datos { get; set; }
 
         public virtual IEnumerable<ImagenReproductor> Imagenes { get; set; }
 

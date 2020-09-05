@@ -58,9 +58,9 @@
     </div>
     <div class="col-lg-5">
         <div class="card shadow">
-            <h6 class="card-header bg-primary text-light">Información del Reproductor</h6>
+            <h6 class="card-header text-center text-light bg-primary">Información del Reproductor</h6>
             <div class="card-body">
-                @if (Model.Datos.Count() == 0)
+                @if (Model.Datos == null)
                 {
                     <p class="text-center">Aún no se agrego información de este reproductor.</p>
                     <div class="text-center mt-4">
@@ -71,7 +71,71 @@
                 }
                 else
                 {
+                    <dl class="row">
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Peso)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Peso)</dd>
 
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Talla)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Talla)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Sexo)</dt>
+                        <dd class="col-sm-6">
+                            @if (Model.Datos.Sexo)
+                            { <span>Macho</span> }
+                            else
+                            { <span>Hembra</span> } 
+                        </dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.HTO)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.HTO)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.HTOLab)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.HTOLab)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.HB)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.HB)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.PPT)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.PPT)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.CSL)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.CSL)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.PS)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.PS)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.UREA)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.UREA)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.GLS)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.GLS)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.RBC)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.RBC)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.WBC)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.WBC)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Observaciones)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Observaciones)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Ojos)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Ojos)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Piel)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Piel)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Aleta)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Aleta)</dd>
+
+                        <dt class="col-sm-6">@Html.DisplayNameFor(model => model.Datos.Branquias)</dt>
+                        <dd class="col-sm-6">@Html.DisplayFor(model => model.Datos.Branquias)</dd>
+                    </dl>
+                    <div class="text-center">
+                        <a href="/DatosReproductor/Edit/@Model.Datos.Id" class="btn btn-outline-primary">
+                            Editar Información <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
                 }
             </div>
         </div>

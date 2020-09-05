@@ -14,14 +14,17 @@ namespace Sirep.Models
         [Required]
         public int ReproductorId { get; set; }
 
+        [Display(Name = "Peso (gr)")]
         public double Peso { get; set; }
 
+        [Display(Name = "Talla (cm)")]
         public double Talla { get; set; }
 
         public bool Sexo { get; set; }
 
         public double HTO { get; set; }
 
+        [Display(Name = "HTO (Lab)")]      
         public double HTOLab { get; set; }
 
         public double HB { get; set; }

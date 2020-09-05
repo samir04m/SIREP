@@ -404,7 +404,8 @@ namespace Sirep.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReproductorId");
+                    b.HasIndex("ReproductorId")
+                        .IsUnique();
 
                     b.ToTable("DatosReproductores");
                 });
@@ -721,7 +722,7 @@ namespace Sirep.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Sirep.Areas.Admin.Models.TUsuarios", "Usuario")
-                        .WithMany()
+                        .WithMany("CentroUsuarios")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -730,8 +731,8 @@ namespace Sirep.Data.Migrations
             modelBuilder.Entity("Sirep.Models.DatosReproductor", b =>
                 {
                     b.HasOne("Sirep.Models.Reproductor", "Reproductor")
-                        .WithMany("Datos")
-                        .HasForeignKey("ReproductorId")
+                        .WithOne("Datos")
+                        .HasForeignKey("Sirep.Models.DatosReproductor", "ReproductorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
