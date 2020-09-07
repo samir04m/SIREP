@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Sirep.Models.ImagenReproductor>
+
+@{
+    ViewData["Title"] = "Gestionar Fotos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gestionar Fotos del Reproductor (@ViewBag.Reproductor.ChipId)</h2>
+<hr />
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-primary my-4" role="alert">
+        Aún no se han agregado fotos de este reproductor.
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            var img = "data:image/jpg;base64," + Convert.ToBase64String(item.Imagen, 0, item.Imagen.Length);
+
+            <div class="col-sm-12 col-md-6 col-lg-3 pb-3">
+                <div class="card">
+                    <img class="card-img-top" src="@img" alt="Foto @item.Numero">
+                    <div class="card-body">
+                        <form asp-action="Edit" method="get" autocomplete="off">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="number" name="Numero" class="form-control" placeholder="Número"
+                                           aria-label="Número" aria-describedby="button-submit" value="@item.Numero">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-success" type="submit" id="button-submit">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="text-center">
+                            <button class="btn btn-danger" onclick="confirmReset(@item.Id);"><i class="far fa-trash-alt"></i> Eliminar</button>
+                            @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="text-center my-5">
+    <a href="/Reproductor/Details/@ViewBag.Reproductor.Id" class="btn btn-outline-secondary rounded-pill">
+        <i class="fas fa-arrow-left"></i> Volver al Detalles del Reproductor
+    </a>
+</div>
+
+@section Scripts {
+    <script src="~/js/sweetalert.min.js"></script>
+
+    <script>
+        function confirmReset(id) {
+            swal({
+                title: "Eliminar Foto",
+                text: "¿Está seguro que quierer eliminar este registro?" ,
+                icon: "warning",
+                buttons: {
+                    cancel: "Cancelar",
+                    confirm: "Si, Eliminar",
+                },
+            }).then(function(result) {
+                console.log(result);
+                if (result) {
+                    window.location.href =  "/ImagenReproductor/Delete/" + id;
+                }
+            });
+        }
+
+    </script>
+}

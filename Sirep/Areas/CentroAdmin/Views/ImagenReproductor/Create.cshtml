@@ -1,0 +1,75 @@
+﻿@model Sirep.Areas.CentroAdmin.Controllers.ImagenReproductorController
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Agregar Foto al Reproductor (@ViewBag.Reproductor.ChipId)</h2>
+<hr />
+<div class="row mb-4">
+    <div class="col-sm-12 col-lg-6">
+        <div class="card shadow">
+            <h5 class="card-header text-center">Subir una Foto</h5>
+            <div class="card-body">
+                <form asp-action="Create" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Input.ReproductorId" value="@ViewBag.Reproductor.Id" />
+                    <div class="form-group mb-5">
+                        <label asp-for="Input.Imagen" class="control-label"></label>
+                        <input asp-for="Input.Imagen" accept="image/*" type="file" class="form-control-file">
+                        <span asp-validation-for="Input.Imagen" class="text-danger"></span>
+                        <small id="imagenHelp" class="form-text text-muted">El tamaño o peso de la imagen no debe superar los 5 MB.</small>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Numero" class="control-label">Número de la Foto <span class="text-muted">(Opcional)</span></label>
+                        <input asp-for="Input.Numero" class="form-control" />
+                    </div>
+                    <div class="form-group text-center m-0">
+                        <input type="submit" value="Agregar Foto" class="btn btn-primary px-4" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+        <img id="imagenPrevisualizacion" class="img-fluid img-thumbnail">
+    </div>
+</div>
+
+<div class="text-center my-5">
+    <a href="/Reproductor/Details/@ViewBag.Reproductor.Id" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Detalles del Reproductor</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/sweetalert.min.js"></script>
+
+    <script>
+        const $seleccionArchivos = document.querySelector("#Input_Imagen"),
+            $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
+
+        $seleccionArchivos.addEventListener("change", () => {
+            const archivo = $seleccionArchivos.files[0];
+            if (!archivo) {
+                $imagenPrevisualizacion.src = "";
+            } else {
+                if (archivo.size > 1048576 * 5) {
+                    swal({
+                        title: "La imagen supera los 5 MB",
+                        text: "Reduce el peso de la imagen o intente con otra.",
+                        icon: "error",
+                        button: {
+                            text: "Aceptar"
+                        },
+                    });
+                    $imagenPrevisualizacion.src = "";
+                    $seleccionArchivos.value = null;
+                } else {
+                    const objectURL = URL.createObjectURL(archivo);
+                    $imagenPrevisualizacion.src = objectURL;
+                }
+            }           
+        });
+    </script>
+}
+

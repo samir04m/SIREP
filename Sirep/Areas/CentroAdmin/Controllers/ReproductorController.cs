@@ -103,8 +103,9 @@ namespace Sirep.Areas.CentroAdmin.Controllers
         {
             if (id == null) return BadRequest();
 
-            Reproductor reproductor = _context.Reproductores.Include("Especie").Include("Lote").Include("Cuenca").Include("Datos").Include("Imagenes")
-                                            .Where(x => x.Id == id).FirstOrDefault();
+            Reproductor reproductor = _context.Reproductores.Include("Especie").Include("Lote").Include("Cuenca")
+                                                            .Include("Datos").Include("Imagenes")
+                                                            .Where(x => x.Id == id).FirstOrDefault();
 
             if (reproductor == null) return NotFound();
             
