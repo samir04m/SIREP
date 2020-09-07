@@ -11,6 +11,7 @@ namespace Sirep.Models
         public int Id { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Código")]
         public string Codigo { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido.")]

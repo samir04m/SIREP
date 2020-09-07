@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Sirep.Models.Cuenca>
+
+@{
+    ViewData["Title"] = "Cuencas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Gestión de Cuencas</h2>
+<hr />
+<h4 class="mt-5 mb-3 text-center">
+    Lista de Cuencas
+    <a class="btn btn-primary mx-3" asp-action="Create">
+        <i class="fas fa-user-plus"></i> Agregar Cuenca
+    </a>
+</h4>
+
+<div class="table-responsive">
+    <table class="table table-hover" id="mytable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                            <i class="far fa-eye"></i>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        @if (item.Reproductores.Count() > 0)
+                        {
+                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="popover" title="No se puede eliminar"
+                                    data-content="No es posible eliminar este registro porque esta relacionado con @item.Reproductores.Count() Reproductores.">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
