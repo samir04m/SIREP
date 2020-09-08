@@ -1,4 +1,4 @@
-﻿
+﻿@model Dictionary<string, int>
 @{
     ViewData["Title"] = "Administrador";
 }
@@ -17,7 +17,7 @@
                         <i class="fas fa-users fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Usuarios"]
                         <div class="text-right">
                             <a class="btn btn-outline-primary" href="/Admin/Usuarios" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -40,7 +40,7 @@
                         <i class="fas fa-store-alt fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Centros"]
                         <div class="text-right">
                             <a class="btn btn-outline-success" href="/Admin/Centros" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -63,7 +63,7 @@
                         <i class="fas fa-fish fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Especies"]
                         <div class="text-right">
                             <a class="btn btn-outline-info" href="/Admin/Especies" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -86,7 +86,7 @@
                         <i class="fas fa-user-tie fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Representantes"]
                         <div class="text-right">
                             <a class="btn btn-outline-dark" href="/Admin/Representantes" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -109,7 +109,7 @@
                         <i class="far fa-file-powerpoint fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Permisos"]
                         <div class="text-right">
                             <a class="btn btn-outline-danger" href="/Admin/Permisos" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -132,7 +132,7 @@
                         <i class="fas fa-university fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Instituciones"]
                         <div class="text-right">
                             <a class="btn btn-outline-warning" href="/Admin/Instituciones" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>
@@ -155,7 +155,7 @@
                         <i class="fas fa-water fa-4x"></i>
                     </div>
                     <div class="col-9">
-                        Número de registros: 1
+                        Número de registros: @Model["Cuencas"]
                         <div class="text-right">
                             <a class="btn btn-outline-secondary" href="/Admin/Cuencas" role="button">
                                 Gestionar <i class="fas fa-tasks"></i>

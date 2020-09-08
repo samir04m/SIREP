@@ -16,6 +16,7 @@ namespace Sirep.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private SignInManager<IdentityUser> _signInManager;
+        private ApplicationDbContext _context;
         private LUsuario usuarios;
 
         public AdminController(
@@ -24,6 +25,7 @@ namespace Sirep.Areas.Admin.Controllers
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context)
         {
+            _context = context;
             _signInManager = signInManager;
             usuarios = new LUsuario(userManager, signInManager, roleManager, context);
         }
@@ -31,7 +33,16 @@ namespace Sirep.Areas.Admin.Controllers
         [Route("/Admin/Inicio")]
         public IActionResult AdminIndex()
         {
-            return View();
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            dict.Add("Usuarios", usuarios.getUsuariosAsync(null, 0).Result.Count);
+            dict.Add("Centros", _context.Centros.Count());
+            dict.Add("Especies", _context.Especies.Count());
+            dict.Add("Representantes", _context.RepresentantesLegales.Count());
+            dict.Add("Permisos", _context.Permisos.Count());
+            dict.Add("Instituciones", _context.Instituciones.Count());
+            dict.Add("Cuencas", _context.Cuencas.Count());
+
+            return View(dict);
         }
 
         [Route("/Admin/Usuarios")]

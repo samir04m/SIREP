@@ -5,14 +5,6 @@
     ViewData["Title"] = $"{palabra} Usuario";
 }
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Admin/Inicio">Panel de Administración</a></li>
-        <li class="breadcrumb-item"><a href="/Admin/Usuarios">Lista de Usuarios</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@palabra Usuario</li>
-    </ol>
-</nav>
-
 <div class="row">
     <div class="col-sm-12 offset-lg-3 col-lg-6">
         <div class="card rounded shadow">
@@ -81,6 +73,9 @@
     </div>
 </div>
 
+<div class="text-center mt-5">
+    <a href="/Admin/Usuarios" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
