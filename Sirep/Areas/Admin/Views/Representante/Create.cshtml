@@ -16,14 +16,14 @@
                     @Html.AntiForgeryToken()
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="NID" class="control-label"></label>
-                        <input asp-for="NID" class="form-control" />
-                        <span asp-validation-for="NID" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Nombre" class="control-label"></label>
                         <input asp-for="Nombre" class="form-control" />
                         <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NID" class="control-label"></label>
+                        <input asp-for="NID" class="form-control" />
+                        <span asp-validation-for="NID" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
@@ -41,7 +41,7 @@
                 </form>
             </div>
         </div>
-        <div class="text-center my-4">
+        <div class="text-center mt-5">
             <a asp-action="Representantes" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Listado</a>
         </div>
     </div>

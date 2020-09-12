@@ -12,7 +12,7 @@
         <div class="card shadow mb-3">
             <div class="card-header text-center"><b>Información del Centro</b></div>
             <div class="card-body">
-                <dl class="row lh-25">
+                <dl class="row">
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.Nombre)
                     </dt>
@@ -56,6 +56,10 @@
                         @Html.DisplayFor(model => model.RepresentanteLegal.Nombre)
                     </dd>
                 </dl>
+                
+                <b>@Html.DisplayNameFor(model => model.Informacion)</b>
+                <p class="text-justify">@Html.DisplayFor(model => model.Informacion)</p>
+
                 <div class="text-center">
                     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success"><i class="far fa-edit"></i> Editar</a>
                     <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="far fa-trash-alt"></i> Eliminar</a>

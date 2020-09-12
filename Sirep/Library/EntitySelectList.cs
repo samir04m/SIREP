@@ -133,7 +133,7 @@ namespace Sirep.Library
                 selectList.Add(new SelectListItem
                 {
                     Value = item.Id + "",
-                    Text = item.Familia+" - "+item.NombreComun
+                    Text = $"{item.NombreComun} ({item.Nombre})"
                 });
             });
             return selectList;

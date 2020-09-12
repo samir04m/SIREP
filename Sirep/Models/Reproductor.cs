@@ -35,10 +35,6 @@ namespace Sirep.Models
         [Display(Name = "Cuenca")]
         public int CuencaId { get; set; }
 
-        public virtual DatosReproductor Datos { get; set; }
-
-        public virtual IEnumerable<ImagenReproductor> Imagenes { get; set; }
-
         [ForeignKey("EspecieId")]
         public virtual Especie Especie { get; set; }
 
@@ -47,6 +43,12 @@ namespace Sirep.Models
 
         [ForeignKey("CuencaId")]
         public virtual Cuenca Cuenca { get; set; }
+
+        public virtual DatosReproductor Datos { get; set; }
+
+        public virtual IEnumerable<ImagenReproductor> Imagenes { get; set; }
+
+        public virtual IEnumerable<LocusReproductor> Locus { get; set; }
 
     }
 }

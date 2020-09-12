@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sirep.Data.Migrations
 {
-    public partial class DesdeCero : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,10 +73,11 @@ namespace Sirep.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(maxLength: 50, nullable: false),
+                    NombreComun = table.Column<string>(maxLength: 50, nullable: false),
                     Familia = table.Column<string>(maxLength: 50, nullable: false),
                     Orden = table.Column<string>(maxLength: 50, nullable: false),
-                    Codigo = table.Column<string>(maxLength: 50, nullable: true),
-                    NombreComun = table.Column<string>(maxLength: 50, nullable: false)
+                    Codigo = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -89,7 +90,8 @@ namespace Sirep.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(maxLength: 100, nullable: false)
+                    Nombre = table.Column<string>(maxLength: 100, nullable: false),
+                    Informacion = table.Column<string>(maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -152,7 +154,8 @@ namespace Sirep.Data.Migrations
                     NID = table.Column<string>(maxLength: 30, nullable: true),
                     Telefono = table.Column<string>(maxLength: 30, nullable: true),
                     Direccion = table.Column<string>(maxLength: 50, nullable: false),
-                    Lugar = table.Column<string>(maxLength: 50, nullable: true),
+                    Lugar = table.Column<string>(maxLength: 50, nullable: false),
+                    Informacion = table.Column<string>(nullable: true),
                     DepartamentoId = table.Column<int>(nullable: false),
                     RepresentanteLegalId = table.Column<int>(nullable: false)
                 },
@@ -298,22 +301,26 @@ namespace Sirep.Data.Migrations
                     ReproductorId = table.Column<int>(nullable: false),
                     Peso = table.Column<double>(nullable: false),
                     Talla = table.Column<double>(nullable: false),
-                    Sexo = table.Column<bool>(nullable: false),
-                    HTO = table.Column<double>(nullable: false),
-                    HTOLab = table.Column<double>(nullable: false),
-                    HB = table.Column<double>(nullable: false),
-                    PPT = table.Column<double>(nullable: false),
+                    Sexo = table.Column<string>(maxLength: 1, nullable: false),
                     CSL = table.Column<double>(nullable: false),
+                    PPT = table.Column<double>(nullable: false),
                     PS = table.Column<double>(nullable: false),
                     UREA = table.Column<double>(nullable: false),
                     GLS = table.Column<double>(nullable: false),
                     RBC = table.Column<double>(nullable: true),
+                    RBC2d = table.Column<double>(nullable: true),
+                    HB = table.Column<double>(nullable: false),
+                    HTO = table.Column<double>(nullable: false),
+                    HTOLab = table.Column<double>(nullable: false),
+                    VCM = table.Column<double>(nullable: true),
+                    HCM = table.Column<double>(nullable: true),
+                    CHCM = table.Column<double>(nullable: true),
                     WBC = table.Column<double>(nullable: true),
-                    Observaciones = table.Column<string>(maxLength: 100, nullable: true),
                     Ojos = table.Column<string>(maxLength: 100, nullable: true),
                     Piel = table.Column<string>(maxLength: 100, nullable: true),
                     Aleta = table.Column<string>(maxLength: 100, nullable: true),
-                    Branquias = table.Column<string>(maxLength: 100, nullable: true)
+                    Branquias = table.Column<string>(maxLength: 100, nullable: true),
+                    Observaciones = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -341,6 +348,28 @@ namespace Sirep.Data.Migrations
                     table.PrimaryKey("PK_ImagenReproductores", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ImagenReproductores_Reproductores_ReproductorId",
+                        column: x => x.ReproductorId,
+                        principalTable: "Reproductores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LocusReproductores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReproductorId = table.Column<int>(nullable: false),
+                    ValorA = table.Column<int>(nullable: false),
+                    ValorB = table.Column<int>(nullable: false),
+                    Numero = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocusReproductores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LocusReproductores_Reproductores_ReproductorId",
                         column: x => x.ReproductorId,
                         principalTable: "Reproductores",
                         principalColumn: "Id",
@@ -376,6 +405,11 @@ namespace Sirep.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ImagenReproductores_ReproductorId",
                 table: "ImagenReproductores",
+                column: "ReproductorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LocusReproductores_ReproductorId",
+                table: "LocusReproductores",
                 column: "ReproductorId");
 
             migrationBuilder.CreateIndex(
@@ -424,6 +458,9 @@ namespace Sirep.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ImagenReproductores");
+
+            migrationBuilder.DropTable(
+                name: "LocusReproductores");
 
             migrationBuilder.DropTable(
                 name: "PermisoCentros");

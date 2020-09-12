@@ -10,8 +10,8 @@ using Sirep.Data;
 namespace Sirep.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200904214959_DesdeCero")]
-    partial class DesdeCero
+    [Migration("20200911030101_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,7 +263,11 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("Informacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Lugar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -350,6 +354,9 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<double?>("CHCM")
+                        .HasColumnType("float");
+
                     b.Property<double>("CSL")
                         .HasColumnType("float");
 
@@ -357,6 +364,9 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<double>("HB")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("HCM")
                         .HasColumnType("float");
 
                     b.Property<double>("HTO")
@@ -389,16 +399,24 @@ namespace Sirep.Data.Migrations
                     b.Property<double?>("RBC")
                         .HasColumnType("float");
 
+                    b.Property<double?>("RBC2d")
+                        .HasColumnType("float");
+
                     b.Property<int>("ReproductorId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Sexo")
-                        .HasColumnType("bit");
+                    b.Property<string>("Sexo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)")
+                        .HasMaxLength(1);
 
                     b.Property<double>("Talla")
                         .HasColumnType("float");
 
                     b.Property<double>("UREA")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("VCM")
                         .HasColumnType("float");
 
                     b.Property<double?>("WBC")
@@ -442,10 +460,15 @@ namespace Sirep.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Familia")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Familia")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -496,6 +519,10 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Informacion")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -504,6 +531,32 @@ namespace Sirep.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instituciones");
+                });
+
+            modelBuilder.Entity("Sirep.Models.LocusReproductor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReproductorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorB")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReproductorId");
+
+                    b.ToTable("LocusReproductores");
                 });
 
             modelBuilder.Entity("Sirep.Models.Lote", b =>
@@ -743,6 +796,15 @@ namespace Sirep.Data.Migrations
                 {
                     b.HasOne("Sirep.Models.Reproductor", "Reproductor")
                         .WithMany("Imagenes")
+                        .HasForeignKey("ReproductorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sirep.Models.LocusReproductor", b =>
+                {
+                    b.HasOne("Sirep.Models.Reproductor", "Reproductor")
+                        .WithMany("Locus")
                         .HasForeignKey("ReproductorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

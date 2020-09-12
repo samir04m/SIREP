@@ -29,11 +29,16 @@ namespace Sirep.Models
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
+        [Required]
         [StringLength(50)]
         [Display(Name = "Corregimiento / Vereda")]
         public string Lugar { get; set; }
 
-        [Required(ErrorMessage = "Este campo es requerido.")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Información")]
+        public string Informacion { get; set; }
+
+        [Required]
         [Display(Name = "Departamento")]
         public int DepartamentoId { get; set; }
 

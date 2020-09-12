@@ -18,100 +18,142 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <input type="hidden" asp-for="ReproductorId" />
+
+                    <h5 class="text-center">Datos morfológicos</h5>
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Peso" class="control-label"></label>
                             <input asp-for="Peso" class="form-control" placeholder="Peso en gramos" data-val="false" />
                             <span asp-validation-for="Peso" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Talla" class="control-label"></label>
                             <input asp-for="Talla" class="form-control" placeholder="Talla en centímetros" data-val="false" />
                             <span asp-validation-for="Talla" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Sexo"></label>
                             <select asp-for="Sexo" class="form-control">
-                                <option value="true">Macho</option>
-                                <option value="false">Hembra</option>
+                                <option value="M">Macho</option>
+                                <option value="H">Hembra</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label asp-for="HTO" class="control-label"></label>
-                            <input asp-for="HTO" class="form-control" placeholder="Hematocrito" data-val="false" />
-                            <span asp-validation-for="HTO" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label asp-for="HTOLab" class="control-label"></label>
-                            <input asp-for="HTOLab" class="form-control" placeholder="Hematocrito (Lab)" data-val="false" />
-                            <span asp-validation-for="HTOLab" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label asp-for="HB" class="control-label"></label>
-                            <input asp-for="HB" class="form-control" placeholder="Hemoglobina" data-val="false" />
-                            <span asp-validation-for="HB" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label asp-for="PPT" class="control-label"></label>
-                            <input asp-for="PPT" class="form-control" placeholder="Solidos totales en plasma" data-val="false" />
-                            <span asp-validation-for="PPT" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                    </div>
+                    <hr />
+                    <h5 class="text-center">Indicadores de estrés</h5>
+                    <div class="form-row mb-4">
+
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="CSL" class="control-label"></label>
                             <input asp-for="CSL" class="form-control" placeholder="Cortisol" data-val="false" />
                             <span asp-validation-for="CSL" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="PPT" class="control-label"></label>
+                            <input asp-for="PPT" class="form-control" placeholder="Solidos totales en plasma" data-val="false" />
+                            <span asp-validation-for="PPT" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="PS" class="control-label"></label>
                             <input asp-for="PS" class="form-control" placeholder="Proteína sanguínea" data-val="false" />
                             <span asp-validation-for="PS" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="UREA" class="control-label"></label>
                             <input asp-for="UREA" class="form-control" placeholder="UREA sanguínea" data-val="false" />
                             <span asp-validation-for="UREA" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="GLS" class="control-label"></label>
                             <input asp-for="GLS" class="form-control" placeholder="Glucosa" data-val="false" />
                             <span asp-validation-for="GLS" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                    </div>
+                    <hr />
+                    <h5 class="text-center">Parametos sanguineos</h5>
+                    <div class="form-row mb-4">
+
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="RBC" class="control-label"></label>
-                            <input asp-for="RBC" class="form-control" placeholder="Recuento eritrocitario" data-val="false" />
+                            <input asp-for="RBC" class="form-control" placeholder="Conteo de glóbulos rojos" data-val="false" />
                             <span asp-validation-for="RBC" class="text-danger"></span>
                         </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="RBC2d" class="control-label"></label>
+                            <input asp-for="RBC2d" class="form-control" placeholder="RBC 2d" data-val="false" />
+                            <span asp-validation-for="RBC2d" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="HB" class="control-label"></label>
+                            <input asp-for="HB" class="form-control" placeholder="Hemoglobina" data-val="false" />
+                            <span asp-validation-for="HB" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="HTO" class="control-label"></label>
+                            <input asp-for="HTO" class="form-control" placeholder="Hematocrito" data-val="false" />
+                            <span asp-validation-for="HTO" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="HTOLab" class="control-label"></label>
+                            <input asp-for="HTOLab" class="form-control" placeholder="Hematocrito (Lab)" data-val="false" />
+                            <span asp-validation-for="HTOLab" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <h5 class="text-center">Índice corpuscular</h5>
+                    <div class="form-row mb-4">
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="VCM" class="control-label"></label>
+                            <input asp-for="VCM" class="form-control" placeholder="VCM" data-val="false" />
+                            <span asp-validation-for="VCM" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="HCM" class="control-label"></label>
+                            <input asp-for="HCM" class="form-control" placeholder="HCM" data-val="false" />
+                            <span asp-validation-for="HCM" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-3">
+                            <label asp-for="CHCM" class="control-label"></label>
+                            <input asp-for="CHCM" class="form-control" placeholder="CHCM" data-val="false" />
+                            <span asp-validation-for="CHCM" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group col-md-6 col-lg-3">
                             <label asp-for="WBC" class="control-label"></label>
                             <input asp-for="WBC" class="form-control" placeholder="Recuento de glóbulos blancos" data-val="false" />
                             <span asp-validation-for="WBC" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label asp-for="Observaciones" class="control-label"></label>
-                            <input asp-for="Observaciones" class="form-control" />
-                            <span asp-validation-for="Observaciones" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                    </div>
+                    <hr />
+                    <h5 class="text-center">Anamnesico</h5>
+                    <div class="form-row mb-4">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Ojos" class="control-label"></label>
-                            <input asp-for="Ojos" class="form-control" />
+                            <input asp-for="Ojos" class="form-control" value="Normal" />
                             <span asp-validation-for="Ojos" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Piel" class="control-label"></label>
-                            <input asp-for="Piel" class="form-control" />
+                            <input asp-for="Piel" class="form-control" value="Normal" />
                             <span asp-validation-for="Piel" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Aleta" class="control-label"></label>
-                            <input asp-for="Aleta" class="form-control" />
+                            <input asp-for="Aleta" class="form-control" value="Normal" />
                             <span asp-validation-for="Aleta" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
+                        <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Branquias" class="control-label"></label>
-                            <input asp-for="Branquias" class="form-control" />
+                            <input asp-for="Branquias" class="form-control" value="Normal" />
                             <span asp-validation-for="Branquias" class="text-danger"></span>
                         </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="Observaciones" class="control-label"></label>
+                            <input asp-for="Observaciones" class="form-control" value="NO" />
+                            <span asp-validation-for="Observaciones" class="text-danger"></span>
+                        </div>
                     </div>
+
                     <div class="form-group text-center m-0">
                         <input type="submit" value="Guardar cambios" class="btn btn-success px-4" />
                     </div>

@@ -10,6 +10,10 @@
     <Compile Remove="Data\Migrations\20200904195749_DesdeCero2.Designer.cs" />
     <Compile Remove="Data\Migrations\20200904214740_DesdeCero2.cs" />
     <Compile Remove="Data\Migrations\20200904214740_DesdeCero2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200909160814_DesdeCero.cs" />
+    <Compile Remove="Data\Migrations\20200909160814_DesdeCero.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200911030010_Inicial.cs" />
+    <Compile Remove="Data\Migrations\20200911030010_Inicial.Designer.cs" />
   </ItemGroup>
 
 

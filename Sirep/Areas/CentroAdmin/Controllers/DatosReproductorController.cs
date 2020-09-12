@@ -25,7 +25,7 @@ namespace Sirep.Areas.CentroAdmin.Controllers
         [Route("/DatosReproductor/Create/{ReproductorId}")]
         public IActionResult Create(int ReproductorId)
         {
-            var reproductor = _context.Reproductores.Include("Datos").Where(x => x.Id == ReproductorId).FirstOrDefault();
+            var reproductor = _context.Reproductores.Include("Datos").Include("Lote").Where(x => x.Id == ReproductorId).FirstOrDefault();
             if (reproductor.Datos != null)
             {
                 return Redirect("/Reproductor/Details/" + ReproductorId);

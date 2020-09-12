@@ -19,18 +19,15 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.NID)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Telefono)
+                    Lugar
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Departamento)
                 </th>
-                <th></th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -38,13 +35,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NID)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Telefono)
+                        @Html.DisplayFor(modelItem => item.Lugar)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Departamento.Nombre)

@@ -14,6 +14,10 @@ namespace Sirep.Models
         [StringLength(100)]
         public string Nombre { get; set; }
 
+        [StringLength(300)]
+        [Display(Name = "Información")]
+        public string Informacion { get; set; }
+
         public virtual IEnumerable<PermisoCentro> PermisoCentros { get; set; }
     }
 }

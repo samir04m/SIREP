@@ -41,6 +41,14 @@ namespace Sirep.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Create2()
+        {
+            ViewBag.DepartamentoId = _selectList.DepartamentosSelectList();
+            ViewBag.RepresentanteLegalId = _selectList.RepresentantesSelectList();
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Centro centro)
