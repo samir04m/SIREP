@@ -104,7 +104,7 @@ namespace Sirep.Areas.CentroAdmin.Controllers
             if (id == null) return BadRequest();
 
             Reproductor reproductor = _context.Reproductores.Include("Especie").Include("Lote").Include("Cuenca")
-                                                            .Include("Datos").Include("Imagenes")
+                                                            .Include("Datos").Include("Imagenes").Include("Locus")
                                                             .Where(x => x.Id == id).FirstOrDefault();
 
             if (reproductor == null) return NotFound();
@@ -144,5 +144,76 @@ namespace Sirep.Areas.CentroAdmin.Controllers
             }
             return RedirectToAction("Reproductores", new { CentroId = CentroId });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Reproductor/CreateLocus")]
+        public ActionResult CreateLocus(int ReproductorId, int ValorA, int ValorB, int? Numero)
+        {
+            if (!ReproductorId.Equals(0) && !ValorA.Equals(0) && !ValorB.Equals(0))
+            {
+                var reproductor = _context.Reproductores.Find(ReproductorId);
+                if (reproductor != null)
+                {
+                    var locus = new LocusReproductor
+                    {
+                        ReproductorId = ReproductorId,
+                        ValorA = ValorA,
+                        ValorB = ValorB,
+                        Numero = Numero
+                    };
+                    _context.Add(locus);
+                    _context.SaveChanges();
+                    return RedirectToAction("Details", new { id = reproductor.Id });
+                }
+            }
+            return BadRequest();
+        }
+
+        [Route("/Reproductor/EditLocus/{id}")]
+        public ActionResult EditLocus(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            LocusReproductor locus = _context.LocusReproductores.Find(id);
+
+            if (locus == null) return NotFound();
+
+            return View(locus);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Reproductor/EditLocus/{id}")]
+        public ActionResult EditLocus(LocusReproductor locus)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(locus).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Details", new { id = locus.ReproductorId });
+            }
+            return View(locus);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Reproductor/RemoveLocus")]
+        public ActionResult RemoveLocus(int LocusId)
+        {
+            if (!LocusId.Equals(0))
+            {
+                var locus = _context.LocusReproductores.Find(LocusId);
+                if (locus != null)
+                {
+                    _context.Remove(locus);
+                    _context.SaveChanges();
+                    return RedirectToAction("Details", new { id = locus.ReproductorId });
+                }
+            }
+            return BadRequest();
+        }
+
+
     }
 }

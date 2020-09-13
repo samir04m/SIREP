@@ -199,8 +199,11 @@
                         <dd class="col-sm-7">@Html.DisplayFor(model => model.Datos.Branquias)</dd>
                     </dl>
                     <div class="text-center">
-                        <a href="/DatosReproductor/Edit/@Model.Datos.Id" class="btn btn-outline-primary">
-                            Editar Información <i class="fas fa-edit"></i>
+                        <button type="button" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#locusModal">
+                            <i class="fas fa-dna"></i> Información Genética
+                        </button>
+                        <a href="/DatosReproductor/Edit/@Model.Datos.Id" class="btn btn-outline-success mb-2">
+                            Editar <i class="fas fa-edit"></i>
                         </a>
                     </div>
                 }
@@ -215,12 +218,106 @@
     </a>
 </div>
 
-@section Scripts {
-    <script src="~/js/viewer.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            var galley = document.getElementById('galley');
-            var viewer = new Viewer(galley);
-        });
-    </script>
+<div class="modal fade" id="locusModal" tabindex="-1" role="dialog" aria-labelledby="locusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locusModalLabel">Información Genética</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (Model.Locus.Count() > 0)
+                {
+                    <h6 class="text-center">Lista de Locuses</h6>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>A</th>
+                                <th>B</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Locus)
+                            {
+                                <tr>
+                                    <td>@item.Numero</td>
+                                    <td>@item.ValorA</td>
+                                    <td>@item.ValorB</td>
+                                    <td class="text-right">
+                                        <a asp-action="EditLocus" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <form asp-action="RemoveLocus" class="d-inline-block">
+                                            <input type="hidden" name="LocusId" value="@item.Id" required />
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-secondary my-3" role="alert">
+                        Aún no se ha agregado información genética de este reproductor.
+                    </div>
+                }
+                <div class="text-center">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLocusForm" aria-expanded="false" aria-controls="collapseLocusForm">
+                        Agregar Información de Locus
+                    </button>
+                </div>
+
+                <div class="collapse" id="collapseLocusForm">
+                    <div class="card card-body mt-3">
+                        <form asp-action="CreateLocus">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ReproductorId" value="@Model.Id" required />
+                            <div class="form-row">
+                                <div class="form-group col-sm">
+                                    <label for="ValorA">Valor A</label>
+                                    <input type="number" name="ValorA" class="form-control" placeholder="A" required />
+                                </div>
+                                <div class="form-group col-sm">
+                                    <label for="ValorB">Valor B</label>
+                                    <input type="number" name="ValorB" class="form-control" placeholder="B" required />
+                                </div>
+                                <div class="form-group col-sm">
+                                    <label for="Numero">Numero</label>
+                                    <input type="number" name="Numero" class="form-control" placeholder="Numero" />
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.Imagenes.Count() > 0)
+{
+    @section Scripts {
+        <script src="~/js/viewer.js"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+                var galley = document.getElementById('galley');
+                var viewer = new Viewer(galley);
+            });
+        </script>
+    }
 }
