@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,8 +44,8 @@ namespace Sirep.Areas.Simulador.Controllers
         }
 
         [Authorize(Roles = "Centro")]
-        [Route("/Simulador/Procesar")]
-        public IActionResult Procesar()
+        [Route("/Simulador/Procesar/{id}")]
+        public IActionResult Procesar(int id)
         {
             if (datos == null) return BadRequest();
             if (datos.Count() == 0) return BadRequest();
@@ -52,14 +55,18 @@ namespace Sirep.Areas.Simulador.Controllers
 
             foreach (var item in datos)
             {
-                if (item.NumeroReproductoresValidos >= 4)
+                if (item.Especie.Id == id)
                 {
-                    core.AddEstacion(item, datosSimulador);
+                    if (item.NumeroReproductoresValidos >= 4)
+                    {
+                        core.AddEstacion(item, datosSimulador);
+                        core.Procesar();
+                        return Redirect("/Simulador/Informes/"+item.Centro.Id);
+                    }
+                    break;
                 }
             }
-            core.Procesar();
-
-            return Redirect("/Simulador/Resultados");
+            return NotFound();
         }
 
         [Authorize(Roles = "Centro")]
@@ -69,20 +76,29 @@ namespace Sirep.Areas.Simulador.Controllers
             var informes = db.Informes.Include("Centro").Include("Especie").Where(x => x.CentroId == CentroId)
                                        .OrderByDescending(x => x.Fecha).ToList();
 
+            ViewBag.CentroId = CentroId;
             return View(informes);
         }
 
         [Authorize(Roles = "Centro")]
-        [Route("/Simulador/VerInforme/{id}")]
-        public IActionResult VerInforme(int id)
+        [Route("/Simulador/DeleteInforme/{id}")]
+        public IActionResult DeleteInforme(int id)
         {
-            var ruta = "Content/Informes/Informe"+id+".html";
-            if (Directory.Exists(ruta))
-            {
+            var informe = db.Informes.Find(id);
+            if (informe == null) return NotFound();
 
+            var ruta = "wwwroot/Content/Informes/Informe"+id+".html";
+
+            if (System.IO.File.Exists(ruta))
+            {
+                System.IO.File.Delete(ruta);
             }
-            return View();
+            db.Informes.Remove(informe);
+            db.SaveChanges();
+
+            return Redirect("/Simulador/Informes/"+informe.CentroId);
         }
+
 
         class Notificador : IReceptorAvance
         {
@@ -90,33 +106,14 @@ namespace Sirep.Areas.Simulador.Controllers
 
             public Notificador(DateTime start)
             {
-                // TODO: Complete member initialization
                 this.start = start;
             }
-            public void SiguientePaso(double factoCompletitud)
-            {
-                //Console.Write("\r{0:N2}%      ", factoCompletitud * 100);
-            }
-
-            public void EmpezadoCalculoEstacion(string nombre)
-            {
-                //Console.WriteLine("{0} - Se empezo el calculo de {1}...", DateTime.Now - start, nombre);
-            }
-
-            public void FinalizadoCalculoEstacion(string nombre)
-            {
-                //Console.WriteLine("\r{0} - Se finalizo el calculo de {1}", DateTime.Now - start, nombre);
-            }
-
-            public void EmpezadoInforme(string nombre)
-            {
-                //Console.WriteLine("{0} - Se empezo el informe de {1}...", DateTime.Now - start, nombre);
-            }
-
-            public void FinalizadoInforme(string nombre)
-            {
-                //Console.WriteLine("{0} - Se finalizo el informe de {1}", DateTime.Now - start, nombre);
-            }
+            public void SiguientePaso(double factoCompletitud) { }
+            public void EmpezadoCalculoEstacion(string nombre) { }
+            public void FinalizadoCalculoEstacion(string nombre) { }
+            public void EmpezadoInforme(string nombre) { }
+            public void FinalizadoInforme(string nombre) { }
         }
+
     }
 }

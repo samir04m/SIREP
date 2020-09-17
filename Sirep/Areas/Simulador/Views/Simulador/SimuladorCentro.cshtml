@@ -6,140 +6,167 @@
     var claseShowActive = " show active";
 }
 
-<h2>Bienvenido al Simulador de Cruces</h2>
+<h4>Bienvenido al Simulador de Cruces</h4>
 <hr />
-<p>A continuación se muestra el listado de los reproductores del centro piscícola <b>(@ViewBag.Centro.Nombre)</b>.</p>
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    @foreach (var item in Model)
-    {
-        <li class="nav-item">
-            <a class="nav-link @claseActive" id="@String.Concat("especie", item.Especie.Id)-tab" data-toggle="tab"
-               href="#@String.Concat("especie", item.Especie.Id)" role="tab" aria-controls="@String.Concat("especie", item.Especie.Id)"
-               aria-selected="true">@item.Especie.NombreComun</a>
-            @{ claseActive = ""; }
-        </li>
-    }
-</ul>
-<div class="tab-content" id="myTabContent">
-    @foreach (var item in Model)
-    {
-    <div class="tab-pane fade py-3 @claseShowActive" id="@String.Concat("especie",item.Especie.Id)" role="tabpanel" aria-labelledby="@String.Concat("especie",item.Especie.Id)-tab">
-
-        @if (item.Reproductores.Count() > 0)
+@if (Model.Count() > 0)
+{
+    <p>A continuación se muestra el listado de los reproductores del centro piscícola <b>(@ViewBag.Centro.Nombre)</b>.</p>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        @foreach (var item in Model)
         {
-        <h5 class="mb-3 overflow-auto">
-            Lista de Reproductores (@item.Especie.Nombre)
-
-            @if (item.NumeroReproductoresValidos >= 4)
-            {
-                <a href="/Simulador/Procesar" class="btn btn-primary float-right">
-                    Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
-                </a>
-            }
-            else
-            {
-                <span class="d-inline-block float-right" data-toggle="popover" data-content="No se puede realizar el calculo porque hay menos de 4 reproductores aptos.">
-                    <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>
-                        Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
-                    </button>
-                </span>
-            }
-        </h5>
-
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>Incluir</th>
-                        <th>ChipId</th>
-                        <th>Sexo</th>
-                        @foreach (var numero in item.NumerosLocuses)
-                        {
-                            <th>PL @String.Concat(numero, "A")</th>
-                            <th>PL @String.Concat(numero, "B")</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var rep in item.Reproductores)
-                    {
-
-                        var claseDisabled = (!rep.Estado) ? "bg-muted text-muted" : "";
-                        <tr class="@claseDisabled">
-                            <td>
-                                @if (rep.Estado)
-                                {
-                                    <div class="form-group form-check mb-0 ml-2">
-                                        <input type="checkbox" class="form-check-input" name="include" id="@String.Concat("checkRep",rep.Id)" checked>
-                                        <label class="form-check-label" for="@String.Concat("checkRep",rep.Id)"></label>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <button type="button" class="btn btn-link btn-sm text-secondary" data-toggle="popover" title="Reproductor No Apto"
-                                            data-content="No es posible incluir a este reproductor en la simulación porque le hacen falta datos, ya sea el sexo o información de locus.">
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                }
-                            </td>
-                            <td><a href="/Reproductor/Details/@rep.Id">@rep.ChipId</a></td>
-                            <td>
-                                @if (rep.Sexo.Equals("?"))
-                                {
-                                    <i class="far fa-question-circle"></i>
-                                }
-                                else
-                                {
-                                    @rep.Sexo
-                                }
-                            </td>
-                            @foreach (var numero in item.NumerosLocuses)
-                            {
-                                <td>
-                                    @if (rep.Locus[numero].ValorA == 0)
-                                    {
-                                        <i class="far fa-question-circle"></i>
-                                    }
-                                    else
-                                    {
-                                        @rep.Locus[numero].ValorA
-                                    }
-                                </td>
-                                <td>
-                                    @if (rep.Locus[numero].ValorB == 0)
-                                    {
-                                        <i class="far fa-question-circle"></i>
-                                    }
-                                    else
-                                    {
-                                        @rep.Locus[numero].ValorB
-                                    }
-                                </td>
-                            }
-                        </tr>
+            <li class="nav-item">
+                <a class="nav-link @claseActive" id="@String.Concat("especie", item.Especie.Id)-tab" data-toggle="tab"
+                   href="#@String.Concat("especie", item.Especie.Id)" role="tab" aria-controls="@String.Concat("especie", item.Especie.Id)"
+                   aria-selected="true">@item.Especie.NombreComun</a>
+                @{ claseActive = ""; }
+            </li>
                     }
-                </tbody>
-            </table>
-            <span class="text-muted">@item.NumeroReproductoresValidos de @item.Reproductores.Count() reproductores estan aptos para la simulación.</span>
-        }
-        else
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        @foreach (var item in Model)
         {
-            <div class="alert alert-primary" role="alert">
-                No se encontró a ningún reproductor de esta especie disponible para simulación. <br />
-                Las razones pueden ser las siguentes:
-                <ul>
-                    <li>No se ha ingresado la información genética de los reproductores para esta especie.</li>
-                </ul>
-            </div>
+            <div class="tab-pane fade py-3 @claseShowActive" id="@String.Concat("especie", item.Especie.Id)" role="tabpanel" aria-labelledby="@String.Concat("especie", item.Especie.Id)-tab">
 
+                @if (item.Reproductores.Count() > 0)
+                {
+                    <h5 class="mb-3 overflow-auto">
+                        Lista de Reproductores (@item.Especie.Nombre)
+
+                        @if (item.NumeroReproductoresValidos >= 4)
+                        {
+                            <a href="/Simulador/Procesar/@item.Especie.Id" class="btn btn-primary float-right">
+                                Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="d-inline-block float-right" data-toggle="popover" data-content="No se puede realizar el calculo porque hay menos de 4 reproductores aptos.">
+                                <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>
+                                    Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
+                                </button>
+                            </span>
+                        }
+                    </h5>
+                    @*<span class="text-muted">@item.NumeroReproductoresValidos de @item.Reproductores.Count() reproductores estan aptos para la simulación.</span>*@
+                    <div class="table-responsive">
+                        @{ var tablaId = $"tabla{item.Especie.Id}"; }
+                        <table class="table table-sm" id="@tablaId">
+                            <thead>
+                                <tr>
+                                    <th>Valido</th>
+                                    <th>ChipId</th>
+                                    <th>Sexo</th>
+                                    @foreach (var numero in item.NumerosLocuses)
+                                    {
+                                        <th>PL @String.Concat(numero, "A")</th>
+                                        <th>PL @String.Concat(numero, "B")</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var rep in item.Reproductores)
+                                {
+
+                                    var claseDisabled = (!rep.Estado) ? "bg-muted text-muted" : "";
+                                    <tr class="@claseDisabled">
+                                        <td>
+                                            @if (rep.Estado)
+                                            {
+                                                <span class="text-success px-2">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-link btn-sm text-secondary" data-toggle="popover" title="Reproductor No Apto"
+                                                        data-content="No es posible incluir a este reproductor en la simulación porque le hacen falta datos, ya sea el sexo o información de locus.">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </button>
+                                            }
+                                        </td>
+                                        <td><a href="/Reproductor/Details/@rep.Id">@rep.ChipId</a></td>
+                                        <td>
+                                            @if (rep.Sexo.Equals("?"))
+                                            {
+                                                <i class="far fa-question-circle"></i>
+                                            }
+                                            else
+                                            {
+                                                @rep.Sexo
+                                            }
+                                        </td>
+                                        @foreach (var numero in item.NumerosLocuses)
+                                        {
+                                            <td>
+                                                @if (rep.Locus[numero].ValorA == 0)
+                                                {
+                                                    <i class="far fa-question-circle"></i>
+                                                }
+                                                else
+                                                {
+                                                    @rep.Locus[numero].ValorA
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (rep.Locus[numero].ValorB == 0)
+                                                {
+                                                    <i class="far fa-question-circle"></i>
+                                                }
+                                                else
+                                                {
+                                                    @rep.Locus[numero].ValorB
+                                                }
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="alert alert-primary" role="alert">
+                        No se encontró a ningún reproductor de esta especie disponible para simulación. <br />
+                        Las razones pueden ser las siguentes:
+                        <ul>
+                            <li>No se ha ingresado la información genética de los reproductores para esta especie.</li>
+                        </ul>
+                    </div>
+                }
+            </div>
+            claseShowActive = "";
         }
     </div>
-        claseShowActive = "";
-    }
-</div>
+}
+else
+{
+    <div class="alert alert-primary py-3 mb-5" role="alert">
+        No se han encontrado reproductores aptos para la simulación de cruces.
+    </div>
+}
 
 <div class="text-center mt-3">
     <a href="/Centro/Inicio" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
 </div>
 
-
+@if (Model.Count() > 0)
+{
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                @foreach (var item in Model)
+                {
+                    if (item.Reproductores.Count > 0)
+                    {
+                        var tablaId = $"#tabla{item.Especie.Id}";
+                        @:$("@tablaId").DataTable({"aaSorting": []});
+                    }
+                 }
+                     
+            });
+        </script>
+    }
+}

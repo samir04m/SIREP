@@ -5,39 +5,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Informes</h1>
+<h3>Listado de Informes</h3>
+<hr />
 
-<table class="table">
+<table class="table table-hover" id="mytable">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Fecha)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Centro)
+                @Html.DisplayNameFor(model => model.Especie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Especie)
+                @Html.DisplayNameFor(model => model.Centro)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Centro.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especie.NombreComun)
-            </td>
-            <td>
-                <a asp-action="verInforme" asp-route-id="@item.Id">Ver informe</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            var nombreInforme = "Informe" + item.Id + ".html";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especie.NombreComun)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Centro.Nombre)
+                </td>
+                <td>
+                    <a href="~/Content/Informes/@nombreInforme" target="_blank" class="btn btn-outline-primary btn-sm">
+                        Ver Informe <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm" onclick="confirmReset(@item.Id);">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<div class="text-center my-4">
+    <a href="/Simulador/Centro/@ViewBag.CentroId" class="btn btn-outline-secondary rounded-pill">
+        <i class="fas fa-arrow-left"></i> Volver al Simulador
+    </a>
+</div>
+
+@section Scripts {
+    <script src="~/js/sweetalert.min.js"></script>
+
+    <script>
+        function confirmReset(id) {
+            swal({
+                title: "Eliminar Informe",
+                text: "¿Está seguro que desea eliminar este informe?" ,
+                icon: "warning",
+                buttons: {
+                    cancel: "Cancelar",
+                    confirm: "Si, Eliminar",
+                },
+            }).then(function(result) {
+                console.log(result);
+                if (result) {
+                    window.location.href =  "/Simulador/DeleteInforme/" + id;
+                }
+            });
+        }
+
+    </script>
+}
+

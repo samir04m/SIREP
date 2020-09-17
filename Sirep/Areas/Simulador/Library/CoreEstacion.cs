@@ -184,7 +184,7 @@ namespace Sirep.Areas.Simulador.Library
             informe.TiempoInicial = fechaInicial;
             informe.Model = new Resultado(this, parejasCalculadas, _minimoLoci, NumLoci, m_NombreLocuses);
 
-            var carpeta = "Content/Informes/";
+            var carpeta = "wwwroot/Content/Informes/";
             if (!Directory.Exists(carpeta)) Directory.CreateDirectory(carpeta);
 
             var nombreInforme = _datosSimulador.GuardarInforme(_especieReproductor, fechaInicial);               

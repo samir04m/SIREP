@@ -1,0 +1,1483 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Reporte de los reproductores </title>
+    <style>
+        thead
+        {
+            background-color: darkgray;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        table, td, th
+        {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 12px;
+        }
+
+            table.simple tr:nth-child(2n+2)
+            {
+                background-color: lightgray;
+            }
+
+            table.simple thead
+            {
+                background-color: darkblue;
+            }
+
+            table.mejoresCruces tr:nth-child(4n+1), table.mejoresCruces tr:nth-child(4n+2)
+            {
+                background-color: lightgray;
+            }
+
+            table.mejoresCruces tr:nth-child(2n) td:nth-child(3n+1)
+            {
+                font-weight: bold;
+            }
+
+        @media only print
+        {
+            body
+            {
+                font-size: 10px;
+            }
+
+            thead
+            {
+                font-size: 11px;
+                color: black;
+                background-color: lightgray;
+            }
+
+            table, td, th
+            {
+                font-size: 8px;
+                margin: 0px;
+                padding: 0px;
+                border-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <header>
+            <h1>Informe SIREP</h1>
+            <p>
+                Analizados los posibles cruces de 7 machos con 7
+                hembras.
+            </p>
+        </header>
+
+        <h2>Resumen general</h2>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th>Número de loci</th>
+                    <th>Número de cruces</th>
+                    <th>Número de machos</th>
+                    <th>Número de hembras</th>
+                    <th>Número de gametos esperados</th>
+                    <th>Número de cigotos esperados</th>
+                    <th>Ho promedio de todos los cruces</th>
+                    <th>He promedio todos los cruces</th>
+                    <th>Fis promedio todos los cruces</th>
+                </tr>
+            </thead>
+                <tr>
+                    <td>3</td>
+                    <td>49</td>
+                    <td>7</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>64</td>
+                    <td>0,959 </td>
+                    <td>0,566 </td>
+                    <td>-0,699</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>16</td>
+                    <td>NaN </td>
+                    <td>NaN </td>
+                    <td>NaN</td>
+                </tr>
+        </table>
+
+        <h2>Tablas con la información detallada</h2>
+
+            <h3>Con  3 loci en común</h3>
+            <h4>Tablas de fecuencia alélica</h4>
+            <h5>Conteo alélico para  el locus PL 119</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+                    <tr>
+                        <td>160</td>
+                        <td>896</td>
+                        <td>14,286%</td>
+                    </tr>
+                    <tr>
+                        <td>157</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>159</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>165</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>194</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>169</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>161</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>162</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>152</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>166</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>158</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+                    <tr>
+                        <td>164</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+                    <tr>
+                        <td>153</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+            </table>
+            <h5>Conteo alélico para  el locus PL 14</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+                    <tr>
+                        <td>125</td>
+                        <td>896</td>
+                        <td>14,286%</td>
+                    </tr>
+                    <tr>
+                        <td>121</td>
+                        <td>896</td>
+                        <td>14,286%</td>
+                    </tr>
+                    <tr>
+                        <td>123</td>
+                        <td>896</td>
+                        <td>14,286%</td>
+                    </tr>
+                    <tr>
+                        <td>117</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>122</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>115</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>133</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>132</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>126</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>120</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>111</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+            </table>
+            <h5>Conteo alélico para  el locus PL 24</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+                    <tr>
+                        <td>230</td>
+                        <td>1.344</td>
+                        <td>21,429%</td>
+                    </tr>
+                    <tr>
+                        <td>225</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>223</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>224</td>
+                        <td>672</td>
+                        <td>10,714%</td>
+                    </tr>
+                    <tr>
+                        <td>244</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>228</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>232</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>231</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>221</td>
+                        <td>448</td>
+                        <td>7,143%</td>
+                    </tr>
+                    <tr>
+                        <td>235</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+                    <tr>
+                        <td>255</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+                    <tr>
+                        <td>248</td>
+                        <td>224</td>
+                        <td>3,571%</td>
+                    </tr>
+            </table>
+            <h4>Resumen de los machos</h4>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Hembras cruzadas</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                            <th>Alelos únicos</th>
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+                    <tr>
+                        <td>3A68</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>1,000 </td>
+                        <td>0,605 </td>
+                        <td>-0,658</td>
+                    </tr>
+                    <tr>
+                        <td>3458</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>1,000 </td>
+                        <td>0,605 </td>
+                        <td>-0,658</td>
+                    </tr>
+                    <tr>
+                        <td>E9E4</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,000</td>
+                            <td>0</td>
+                        <td>1,000 </td>
+                        <td>0,562 </td>
+                        <td>-0,783</td>
+                    </tr>
+                    <tr>
+                        <td>3181</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>0,964 </td>
+                        <td>0,587 </td>
+                        <td>-0,644</td>
+                    </tr>
+                    <tr>
+                        <td>30EB</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,000</td>
+                            <td>0</td>
+                        <td>0,929 </td>
+                        <td>0,526 </td>
+                        <td>-0,777</td>
+                    </tr>
+                    <tr>
+                        <td>2F07</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>0,917 </td>
+                        <td>0,562 </td>
+                        <td>-0,609</td>
+                    </tr>
+                    <tr>
+                        <td>0E5B</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,000</td>
+                            <td>0</td>
+                        <td>0,905 </td>
+                        <td>0,514 </td>
+                        <td>-0,765</td>
+                    </tr>
+            </table>
+            <h4>Resumen de las hembras</h4>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Machos cruzados</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                            <th>Alelos únicos</th>
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+                    <tr>
+                        <td>3F9D</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>0,976 </td>
+                        <td>0,562 </td>
+                        <td>-0,739</td>
+                    </tr>
+                    <tr>
+                        <td>0EF7</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>0,976 </td>
+                        <td>0,562 </td>
+                        <td>-0,739</td>
+                    </tr>
+                    <tr>
+                        <td>3387</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,667</td>
+                            <td>0</td>
+                        <td>0,976 </td>
+                        <td>0,605 </td>
+                        <td>-0,617</td>
+                    </tr>
+                    <tr>
+                        <td>EC0B</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,333</td>
+                            <td>0</td>
+                        <td>0,976 </td>
+                        <td>0,562 </td>
+                        <td>-0,739</td>
+                    </tr>
+                    <tr>
+                        <td>FB8A</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,667</td>
+                            <td>0</td>
+                        <td>0,976 </td>
+                        <td>0,605 </td>
+                        <td>-0,617</td>
+                    </tr>
+                    <tr>
+                        <td>306C</td>
+                        <td>7</td>
+                        <td>7</td>
+                        <td>0,000</td>
+                            <td>0</td>
+                        <td>0,952 </td>
+                        <td>0,508 </td>
+                        <td>-0,882</td>
+                    </tr>
+                    <tr>
+                        <td>E989</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>0,667</td>
+                            <td>0</td>
+                        <td>0,881 </td>
+                        <td>0,556 </td>
+                        <td>-0,560</td>
+                    </tr>
+            </table>
+            <h4>Cruces por macho</h4>
+            <table class="mejoresCruces">
+                    <tr>
+                        <th rowspan="2">3A68</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">3458</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">E9E4</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,508</td>
+                            <td>-0,969</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">3181</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,750</td>
+                            <td>0,508</td>
+                            <td>-0,477</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">30EB</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>0,833</td>
+                            <td>0,508</td>
+                            <td>-0,641</td>
+                            <td>0,667</td>
+                            <td>0,339</td>
+                            <td>-0,969</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">2F07</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                            <th colspan="3"
+                                 style="background-color: red;"
+                            >
+                                E989
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,417</td>
+                            <td>0,339</td>
+                            <td>-0,230</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">0E5B</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                306C
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                FB8A
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E989
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3F9D
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0EF7
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3387
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                EC0B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,508</td>
+                            <td>-0,969</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                            <td>0,833</td>
+                            <td>0,508</td>
+                            <td>-0,641</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                    </tr>
+            </table>
+            <h4>Cruces por hembra</h4>
+            <table class="mejoresCruces">
+                    <tr>
+                        <th rowspan="2">3F9D</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">0EF7</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">3387</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,833</td>
+                            <td>0,508</td>
+                            <td>-0,641</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">EC0B</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>0,833</td>
+                            <td>0,466</td>
+                            <td>-0,790</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">FB8A</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,833</td>
+                            <td>0,508</td>
+                            <td>-0,641</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">306C</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                2F07
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,508</td>
+                            <td>-0,969</td>
+                            <td>1,000</td>
+                            <td>0,550</td>
+                            <td>-0,817</td>
+                            <td>1,000</td>
+                            <td>0,508</td>
+                            <td>-0,969</td>
+                            <td>0,667</td>
+                            <td>0,339</td>
+                            <td>-0,969</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">E989</th>
+
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                30EB
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3A68
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3458
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                0E5B
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                E9E4
+                            </th>
+                            <th colspan="3"
+                                style="background-color: green;"
+                            >
+                                3181
+                            </th>
+                            <th colspan="3"
+                                 style="background-color: red;"
+                            >
+                                2F07
+                            </th>
+                    </tr>
+                    <tr>
+
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,635</td>
+                            <td>-0,575</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>1,000</td>
+                            <td>0,593</td>
+                            <td>-0,688</td>
+                            <td>0,750</td>
+                            <td>0,508</td>
+                            <td>-0,477</td>
+                            <td>0,417</td>
+                            <td>0,339</td>
+                            <td>-0,230</td>
+                    </tr>
+            </table>
+            <h3>Con  2 loci en común</h3>
+            <h4>Tablas de fecuencia alélica</h4>
+            <h5>Conteo alélico para  el locus PL 119</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <h5>Conteo alélico para  el locus PL 14</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <h5>Conteo alélico para  el locus PL 24</h5>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <h4>Resumen de los machos</h4>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Hembras cruzadas</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                            <th>Alelos únicos</th>
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <h4>Resumen de las hembras</h4>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Machos cruzados</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                            <th>Alelos únicos</th>
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <h4>Cruces por macho</h4>
+            <table class="mejoresCruces">
+            </table>
+            <h4>Cruces por hembra</h4>
+            <table class="mejoresCruces">
+            </table>
+
+        <footer>
+            <hr />
+            <p>
+                Generado automáticamente por SIREP en <b>00:00:31.9529367</b> a las
+                <time datetime="09/17/2020 17:25:29" pubdate="pubdate">
+                    12:25 de  17/09/2020
+                </time>
+                <br />
+      
+            </p>
+        </footer>
+    </article>
+</body>
+</html>

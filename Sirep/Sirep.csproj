@@ -50,6 +50,7 @@
     <None Include="Areas\Admin\Views\CentroPiscicola\Delete.cshtml" />
     <None Include="Areas\Admin\Views\CentroPiscicola\Details.cshtml" />
     <None Include="Areas\Admin\Views\CentroPiscicola\Edit.cshtml" />
+    <None Include="wwwroot\Content\Informes\Informe3.html" />
   </ItemGroup>
 
 </Project>
