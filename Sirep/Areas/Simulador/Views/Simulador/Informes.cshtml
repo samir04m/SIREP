@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Sirep.Models.Informe>
+
+@{
+    ViewData["Title"] = "Informes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Informes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Centro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Centro.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especie.NombreComun)
+            </td>
+            <td>
+                <a asp-action="verInforme" asp-route-id="@item.Id">Ver informe</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

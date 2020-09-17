@@ -14,6 +14,12 @@
     <Compile Remove="Data\Migrations\20200909160814_DesdeCero.Designer.cs" />
     <Compile Remove="Data\Migrations\20200911030010_Inicial.cs" />
     <Compile Remove="Data\Migrations\20200911030010_Inicial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200913214035_Migration2.cs" />
+    <Compile Remove="Data\Migrations\20200913214035_Migration2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200917041920_Inicial.cs" />
+    <Compile Remove="Data\Migrations\20200917041920_Inicial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200917043118_DesdeCero.cs" />
+    <Compile Remove="Data\Migrations\20200917043118_DesdeCero.Designer.cs" />
   </ItemGroup>
 
 
@@ -25,6 +31,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="RazorGenerator.Templating" Version="2.4.7" />
   </ItemGroup>
 
 
@@ -32,6 +39,8 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\CentroAdmin\Data\" />
     <Folder Include="Areas\CentroAdmin\Models\" />
+    <Folder Include="Areas\Simulador\Data\" />
+    <Folder Include="Areas\Simulador\Models\" />
   </ItemGroup>
 
 

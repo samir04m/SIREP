@@ -56,5 +56,7 @@ namespace Sirep.Models
         public virtual IEnumerable<CentroUsuario> CentroUsuarios { get; set; }
 
         public virtual IEnumerable<PermisoCentro> PermisoCentros { get; set; }
+
+        public virtual IEnumerable<Informe> Informes { get; set; }
     }
 }

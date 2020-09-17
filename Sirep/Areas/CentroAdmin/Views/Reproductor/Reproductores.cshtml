@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2> Gestión de Reproductores (@ViewBag.Centro.Nombre)</h2>
+<h3> Gestión de Reproductores (@ViewBag.Centro.Nombre)</h3>
 <hr />
 
-<h4 class="mt-5 mb-3 text-center">
+<h4 class="my-3 text-center">
     Lista de Reproductores
     <a class="btn btn-primary mx-3" asp-action="Create" asp-route-id="@ViewBag.Centro.Id">
         <i class="fas fa-user-plus"></i> Agregar Reproductor
@@ -21,7 +21,7 @@
             <tr>
                 <th>ChipId</th>
                 <th>Lote</th>
-                <th>Familia</th>
+                <th>Especie</th>
                 <th>Nombre Común</th>
                 <th></th>
             </tr>
@@ -37,7 +37,7 @@
                         @Html.DisplayFor(modelItem => item.Lote.Nombre)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Especie.Familia)
+                        @Html.DisplayFor(modelItem => item.Especie.Nombre)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Especie.NombreComun)

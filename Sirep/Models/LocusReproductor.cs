@@ -14,11 +14,11 @@ namespace Sirep.Models
         [Required]
         public int ReproductorId { get; set; }
 
+        public int Numero { get; set; }
+
         public int ValorA { get; set; }
 
         public int ValorB { get; set; }
-
-        public int? Numero { get; set; }
 
         [ForeignKey("ReproductorId")]
         public virtual Reproductor Reproductor { get; set; }

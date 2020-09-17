@@ -510,6 +510,31 @@ namespace Sirep.Data.Migrations
                     b.ToTable("ImagenReproductores");
                 });
 
+            modelBuilder.Entity("Sirep.Models.Informe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CentroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EspecieId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CentroId");
+
+                    b.HasIndex("EspecieId");
+
+                    b.ToTable("Informes");
+                });
+
             modelBuilder.Entity("Sirep.Models.Institucion", b =>
                 {
                     b.Property<int>("Id")
@@ -538,7 +563,7 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Numero")
+                    b.Property<int>("Numero")
                         .HasColumnType("int");
 
                     b.Property<int>("ReproductorId")
@@ -795,6 +820,21 @@ namespace Sirep.Data.Migrations
                     b.HasOne("Sirep.Models.Reproductor", "Reproductor")
                         .WithMany("Imagenes")
                         .HasForeignKey("ReproductorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sirep.Models.Informe", b =>
+                {
+                    b.HasOne("Sirep.Models.Centro", "Centro")
+                        .WithMany("Informes")
+                        .HasForeignKey("CentroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sirep.Models.Especie", "Especie")
+                        .WithMany("Informes")
+                        .HasForeignKey("EspecieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

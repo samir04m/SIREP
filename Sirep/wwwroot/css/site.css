@@ -82,6 +82,9 @@ main {
 .bg-a {
     background-color: #e4e4e4;
 }
+.bg-muted {
+    background-color: #f7f7f7;
+}
 
 .img-footer {
     height: 90px;

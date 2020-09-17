@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sirep.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class DesdeCero : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -203,6 +203,33 @@ namespace Sirep.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Informes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    CentroId = table.Column<int>(nullable: false),
+                    EspecieId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Informes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Informes_Centros_CentroId",
+                        column: x => x.CentroId,
+                        principalTable: "Centros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Informes_Especies_EspecieId",
+                        column: x => x.EspecieId,
+                        principalTable: "Especies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lotes",
                 columns: table => new
                 {
@@ -361,9 +388,9 @@ namespace Sirep.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReproductorId = table.Column<int>(nullable: false),
+                    Numero = table.Column<int>(nullable: false),
                     ValorA = table.Column<int>(nullable: false),
-                    ValorB = table.Column<int>(nullable: false),
-                    Numero = table.Column<int>(nullable: true)
+                    ValorB = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -406,6 +433,16 @@ namespace Sirep.Data.Migrations
                 name: "IX_ImagenReproductores_ReproductorId",
                 table: "ImagenReproductores",
                 column: "ReproductorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Informes_CentroId",
+                table: "Informes",
+                column: "CentroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Informes_EspecieId",
+                table: "Informes",
+                column: "EspecieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocusReproductores_ReproductorId",
@@ -458,6 +495,9 @@ namespace Sirep.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ImagenReproductores");
+
+            migrationBuilder.DropTable(
+                name: "Informes");
 
             migrationBuilder.DropTable(
                 name: "LocusReproductores");

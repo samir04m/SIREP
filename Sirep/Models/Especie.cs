@@ -32,5 +32,7 @@ namespace Sirep.Models
         public string Codigo { get; set; }
 
         public virtual IEnumerable<Reproductor> Reproductores { get; set; }
+
+        public virtual IEnumerable<Informe> Informes { get; set; }
     }
 }

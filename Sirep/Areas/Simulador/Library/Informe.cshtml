@@ -1,0 +1,307 @@
+﻿@* Generator : Template TypeVisibility : Internal *@
+@using System
+@using System.Linq
+@using Sirep.Areas.Simulador.Library
+
+@functions {
+    public Resultado Model2 { get; set; }
+    public int NumMachos { get; set; }
+    public int NumHembras { get; set; }
+    public DateTime TiempoInicial { get; set; }
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Reporte de los reproductores </title>
+    <style>
+        thead
+        {
+            background-color: darkgray;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        table, td, th
+        {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 12px;
+        }
+
+            table.simple tr:nth-child(2n+2)
+            {
+                background-color: lightgray;
+            }
+
+            table.simple thead
+            {
+                background-color: darkblue;
+            }
+
+            table.mejoresCruces tr:nth-child(4n+1), table.mejoresCruces tr:nth-child(4n+2)
+            {
+                background-color: lightgray;
+            }
+
+            table.mejoresCruces tr:nth-child(2n) td:nth-child(3n+1)
+            {
+                font-weight: bold;
+            }
+
+        @@media only print
+        {
+            body
+            {
+                font-size: 10px;
+            }
+
+            thead
+            {
+                font-size: 11px;
+                color: black;
+                background-color: lightgray;
+            }
+
+            table, td, th
+            {
+                font-size: 8px;
+                margin: 0px;
+                padding: 0px;
+                border-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <header>
+            <h1>Informe SIREP</h1>
+            <p>
+                Analizados los posibles cruces de @NumMachos machos con @NumHembras
+                hembras.
+            </p>
+        </header>
+
+        <h2>Resumen general</h2>
+        <table class="simple">
+            <thead>
+                <tr>
+                    <th>Número de loci</th>
+                    <th>Número de cruces</th>
+                    <th>Número de machos</th>
+                    <th>Número de hembras</th>
+                    <th>Número de gametos esperados</th>
+                    <th>Número de cigotos esperados</th>
+                    <th>Ho promedio de todos los cruces</th>
+                    <th>He promedio todos los cruces</th>
+                    <th>Fis promedio todos los cruces</th>
+                </tr>
+            </thead>
+            @foreach (var rLoci in Model2)
+            {
+                <tr>
+                    <td>@(rLoci.NumLociComun)</td>
+                    <td>@(rLoci.NumCruces)</td>
+                    <td>@(rLoci.NumMachos)</td>
+                    <td>@(rLoci.NumHembras)</td>
+                    <td>@(rLoci.NumGametosEsperados)</td>
+                    <td>@(rLoci.NumCigotosEsperados)</td>
+                    <td>@(rLoci.HoPromedio.ToString("N3")) @*± @(rLoci.HoDE.ToString("N3"))*@</td>
+                    <td>@(rLoci.HePromedio.ToString("N3")) @*± @(rLoci.HeDE.ToString("N3"))*@</td>
+                    <td>@(rLoci.FisPromedio.ToString("N3"))</td>
+                </tr>
+            }
+        </table>
+
+        <h2>Tablas con la información detallada</h2>
+
+        @foreach (var rLoci in Model2)
+        {  
+            <h3>Con  @(rLoci.NumLociComun) loci en común</h3>
+            <h4>Tablas de fecuencia alélica</h4>
+            
+            for (int index = 0; index < rLoci.ConteoAlelosByLocus.Length; index++)
+            {
+            <h5>Conteo alélico para  el locus @rLoci.GetNombreLocus(index)</h5>
+                var conteo = rLoci.ConteoAlelosByLocus[index];
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Alelo</th>
+                        <th>Conteo</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+
+                @foreach (var fa in conteo)
+                {
+                    <tr>
+                        <td>@fa.Alelo</td>
+                        <td>@fa.Conteo.ToString("N0")</td>
+                        <td>@fa.Porcentaje.ToString("N3")%</td>
+                    </tr>
+                }
+            </table>
+            }
+            
+            <h4>Resumen de los machos</h4>
+        
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Hembras cruzadas</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                        @if (Model2.Core.NumEstaciones > 1)
+                        {
+                            <th>Alelos únicos</th>
+                        }
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+                @foreach (var agrupacion in rLoci.ParejasAgrupadasPorMacho)
+                {
+                    <tr>
+                        <td>@(agrupacion.Agrupador.Codigo)</td>
+                        <td>@(agrupacion.NumCruces)</td>
+                        <td>@(agrupacion.NumCrucesAceptables)</td>
+                        <td>@(agrupacion.Agrupador.Ho.ToString("N3"))</td>
+                        @if (Model2.Core.NumEstaciones > 1)
+                        {
+                            <td>@(agrupacion.Agrupador.NumAlelosRaros)</td>
+                        }
+                        <td>@(agrupacion.HoPromedio.ToString("N3")) @*± @(agrupacion.HoDE.ToString("N3"))*@</td>
+                        <td>@(agrupacion.HePromedio.ToString("N3")) @*± @(agrupacion.HeDE.ToString("N3"))*@</td>
+                        <td>@(agrupacion.FisPromedio.ToString("N3"))</td>
+                    </tr>
+                }
+            </table>
+        
+            <h4>Resumen de las hembras</h4>
+            <table class="simple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Machos cruzados</th>
+                        <th>Numero cruces aceptables (Ho>0.5)</th>
+                        <th>Ho individual</th>
+                        @if (Model2.Core.NumEstaciones > 1)
+                        {
+                            <th>Alelos únicos</th>
+                        }
+                        <th>Ho promedio de cruces</th>
+                        <th>He promedio de cruces</th>
+                        <th>Fis promedio</th>
+                    </tr>
+                </thead>
+
+                @foreach (var agrupacion in rLoci.ParejasAgrupadasPorHembra)
+                {
+                    <tr>
+                        <td>@(agrupacion.Agrupador.Codigo)</td>
+                        <td>@(agrupacion.NumCruces)</td>
+                        <td>@(agrupacion.NumCrucesAceptables)</td>
+                        <td>@(agrupacion.Agrupador.Ho.ToString("N3"))</td>
+                        @if (Model2.Core.NumEstaciones > 1)
+                        {
+                            <td>@(agrupacion.Agrupador.NumAlelosRaros)</td>
+                        }
+                        <td>@(agrupacion.HoPromedio.ToString("N3")) @*± @(agrupacion.HoDE.ToString("N3"))*@</td>
+                        <td>@(agrupacion.HePromedio.ToString("N3")) @*± @(agrupacion.HeDE.ToString("N3"))*@</td>
+                        <td>@(agrupacion.FisPromedio.ToString("N3"))</td>
+                    </tr>
+                }
+            </table>
+        
+            <h4>Cruces por macho</h4>
+            <table class="mejoresCruces">
+                @foreach (var sel in rLoci.ParejasAgrupadasPorMacho)
+                {
+                    <tr>
+                        <th rowspan="2">@sel.Agrupador.Codigo</th>
+
+                        @foreach (var pareja in sel.Parejas)
+                        {
+                            <th colspan="3"
+                            @if (pareja.Ho > 0.5)
+                            {
+                                @:style="background-color: green;"
+                            }
+                            else
+                            {
+                                 @:style="background-color: red;"
+                            }
+                            >
+                                @pareja.Hembra.Codigo
+                            </th>
+                        }
+                    </tr>
+                    <tr>
+
+                        @foreach (var pareja in sel.Parejas)
+                        {
+                            <td>@pareja.Ho.ToString("N3")</td>
+                            <td>@pareja.He.ToString("N3")</td>
+                            <td>@pareja.Fis.ToString("N3")</td>
+                        }
+                    </tr>
+                }
+            </table>
+        
+            <h4>Cruces por hembra</h4>
+            <table class="mejoresCruces">
+                @foreach (var sel in rLoci.ParejasAgrupadasPorHembra)
+                {
+                    <tr>
+                        <th rowspan="2">@sel.Agrupador.Codigo</th>
+
+                        @foreach (var pareja in sel.Parejas)
+                        {
+                            <th colspan="3"
+                            @if (pareja.Ho > 0.5)
+                            {
+                                @:style="background-color: green;"
+                            }
+                            else
+                            {
+                                 @:style="background-color: red;"
+                            }
+                            >
+                                @pareja.Macho.Codigo
+                            </th>
+                        }
+                    </tr>
+                    <tr>
+
+                        @foreach (var pareja in sel.Parejas)
+                        {
+                            <td>@pareja.Ho.ToString("N3")</td>
+                            <td>@pareja.He.ToString("N3")</td>
+                            <td>@pareja.Fis.ToString("N3")</td>
+                        }
+                    </tr>
+                }
+            </table>
+        }
+
+        <footer>
+            <hr />
+            <p>
+                Generado automáticamente por SIREP en <b>@(DateTime.Now - TiempoInicial)</b> a las
+                <time datetime="@DateTime.Now.ToUniversalTime()" pubdate="pubdate">
+                    @DateTime.Now.ToShortTimeString() de  @DateTime.Now.ToShortDateString()
+                </time>
+                <br />
+                Desarrollado por GIBEA (Grupo de investagación en Biodiversidad y ecologia aplicada).
+            </p>
+        </footer>
+    </article>
+</body>
+</html>

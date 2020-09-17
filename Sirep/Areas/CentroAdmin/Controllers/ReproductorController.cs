@@ -27,16 +27,8 @@ namespace Sirep.Areas.CentroAdmin.Controllers
         [Route("/Centro/Reproductores/{CentroId}")]
         public IActionResult Reproductores(int CentroId)
         {
-            var lotes = _context.Lotes.Include("Reproductores").Where(x => x.CentroId == CentroId).ToList();
-            List<Reproductor> reproductores = new List<Reproductor>();
-            foreach (var lote in lotes)
-            {
-                foreach (var reproductor in lote.Reproductores.ToList())
-                {
-                    var reproductor2 = _context.Reproductores.Include("Especie").Where(x=>x.Id == reproductor.Id).FirstOrDefault();
-                    reproductores.Add(reproductor2);
-                }
-            }
+            var reproductores = _context.Reproductores.Include("Especie").Include("Lote")
+                                            .Where(x => x.Lote.CentroId == CentroId).OrderBy(x=>x.Especie.NombreComun).ToList();
             ViewBag.Centro = _context.Centros.Find(CentroId);
             return View(reproductores);
         }
@@ -148,9 +140,9 @@ namespace Sirep.Areas.CentroAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/Reproductor/CreateLocus")]
-        public ActionResult CreateLocus(int ReproductorId, int ValorA, int ValorB, int? Numero)
+        public ActionResult CreateLocus(int ReproductorId, int ValorA, int ValorB, int Numero)
         {
-            if (!ReproductorId.Equals(0) && !ValorA.Equals(0) && !ValorB.Equals(0))
+            if (!ReproductorId.Equals(0) && !ValorA.Equals(0) && !ValorB.Equals(0) && !Numero.Equals(0))
             {
                 var reproductor = _context.Reproductores.Find(ReproductorId);
                 if (reproductor != null)

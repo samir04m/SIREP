@@ -30,6 +30,7 @@ namespace Sirep.Data
         public DbSet<DatosReproductor> DatosReproductores { get; set; }
         public DbSet<ImagenReproductor> ImagenReproductores { get; set; }
         public DbSet<LocusReproductor> LocusReproductores { get; set; }
+        public DbSet<Informe> Informes { get; set; }
 
     }
 }

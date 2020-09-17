@@ -59,17 +59,22 @@
         </div>
     </div>
     <div class="col-md-12 offset-lg-1 col-lg-4">
-        <div class="card shadow">
+        <div class="card mb-4 shadow">
             <h5 class="card-header text-center">Reproductores del Centro</h5>
             <div class="card-body">
                 <h6>Cantidad de Reproductores: <span class="badge badge-primary">@ViewBag.cantidadReproductores</span></h6>
                 <div class="text-center mt-4">
-                    <a href="/Centro/Reproductores/@Model.Id" class="btn btn-primary">
+                    <a href="/Centro/Reproductores/@Model.Id" class="btn btn-outline-primary">
                         Gestionar Reproductores <i class="fas fa-tasks"></i>
                     </a>
                 </div>
             </div>
         </div>
+
+        @if (ViewBag.cantidadReproductores >= 4)
+        {
+            <a href="/Simulador/Centro/@Model.Id" class="btn btn-block btn-outline-info py-2 shadow">Ir al Simulador de Cruces</a>
+        }
     </div>
 </div>
 
