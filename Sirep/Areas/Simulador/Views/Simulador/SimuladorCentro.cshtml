@@ -6,7 +6,12 @@
     var claseShowActive = " show active";
 }
 
-<h4>Bienvenido al Simulador de Cruces</h4>
+<h4>
+    Simulador de Cruces
+    <a href="/Simulador/Informes/@ViewBag.Centro.Id" class="btn btn-outline-secondary float-right">
+        Consultar Informes <i class="fas fa-list"></i>
+    </a>
+</h4>
 <hr />
 
 @if (Model.Count() > 0)
@@ -36,14 +41,14 @@
                         @if (item.NumeroReproductoresValidos >= 4)
                         {
                             <a href="/Simulador/Procesar/@item.Especie.Id" class="btn btn-primary float-right">
-                                Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
+                                Iniciar Simulación <i class="fas fa-arrow-alt-circle-right"></i>
                             </a>
                         }
                         else
                         {
                             <span class="d-inline-block float-right" data-toggle="popover" data-content="No se puede realizar el calculo porque hay menos de 4 reproductores aptos.">
                                 <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>
-                                    Iniciar Proceso <i class="fas fa-arrow-alt-circle-right"></i>
+                                    Iniciar Simulación <i class="fas fa-arrow-alt-circle-right"></i>
                                 </button>
                             </span>
                         }
@@ -57,10 +62,10 @@
                                     <th>Valido</th>
                                     <th>ChipId</th>
                                     <th>Sexo</th>
-                                    @foreach (var numero in item.NumerosLocuses)
+                                    @foreach (var numero in item.NumerosLocus)
                                     {
-                                        <th>PL @String.Concat(numero, "A")</th>
-                                        <th>PL @String.Concat(numero, "B")</th>
+                                        <th>PL @numero</th>
+                                        <th>PL @numero</th>
                                     }
                                 </tr>
                             </thead>
@@ -96,7 +101,7 @@
                                                 @rep.Sexo
                                             }
                                         </td>
-                                        @foreach (var numero in item.NumerosLocuses)
+                                        @foreach (var numero in item.NumerosLocus)
                                         {
                                             <td>
                                                 @if (rep.Locus[numero].ValorA == 0)

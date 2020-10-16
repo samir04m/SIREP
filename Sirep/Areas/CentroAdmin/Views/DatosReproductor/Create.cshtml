@@ -16,7 +16,12 @@
         </div>
 
         <div class="card shadow">
-            <h5 class="card-header text-center">Agregar Información del Reproductor (@ViewBag.Reproductor.ChipId)</h5>
+            <h5 class="card-header text-center pb-2">
+                Agregar Información del Reproductor (@ViewBag.Reproductor.ChipId)
+                <button type="button" class="btn btn-link text-secondary float-right p-0" data-toggle="modal" data-target="#infoModal">
+                    <i class="fas fa-info-circle fa-lg"></i>
+                </button>
+            </h5>
             <div class="card-body">
                 <form asp-action="Create" autocomplete="off">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,14 +29,6 @@
 
                     <h5 class="text-center">Datos morfológicos</h5>
                     <div class="form-row">
-                        @*<div class="form-group col-sm-4 col-lg">
-                            <label class="control-label">Chip Id</label>
-                            <input class="form-control disabled" value="@ViewBag.Reproductor.ChipId" readonly />
-                        </div>
-                        <div class="form-group col-sm-4 col-lg">
-                            <label class="control-label">Lote</label>
-                            <input class="form-control disabled" value="@ViewBag.Reproductor.Lote.Nombre" readonly />
-                        </div>*@
                         <div class="form-group col-sm-4 col-lg">
                             <label asp-for="Peso" class="control-label"></label>
                             <input asp-for="Peso" class="form-control" placeholder="Peso en gramos" data-val="false" />
@@ -165,6 +162,35 @@
                             <span asp-validation-for="Observaciones" class="text-danger"></span>
                         </div>
                     </div>
+                    <hr />
+                    <h5 class="text-center">Otros</h5>
+                    <div class="form-row mb-4">
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="TotalLecturas" class="control-label"></label>
+                            <input asp-for="TotalLecturas" class="form-control" placeholder="Número total de lecturas" />
+                            <span asp-validation-for="TotalLecturas" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="NumeroRetenidas" class="control-label"></label>
+                            <input asp-for="NumeroRetenidas" class="form-control" placeholder="Número Retenidas" />
+                            <span asp-validation-for="NumeroRetenidas" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="BajaCalidad" class="control-label"></label>
+                            <input asp-for="BajaCalidad" class="form-control" placeholder="Baja Calidad" />
+                            <span asp-validation-for="BajaCalidad" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="ConcentracionADN" class="control-label"></label>
+                            <input asp-for="ConcentracionADN" class="form-control" placeholder="Concentración (ng/ul)" data-val="false" />
+                            <span asp-validation-for="ConcentracionADN" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-4 col-lg">
+                            <label asp-for="CantidadTotal" class="control-label"></label>
+                            <input asp-for="CantidadTotal" class="form-control" placeholder="Cantidad Total (ng)" data-val="false" />
+                            <span asp-validation-for="CantidadTotal" class="text-danger"></span>
+                        </div>
+                    </div>
 
                     <div class="form-group text-center m-0">
                         <input type="submit" value="Guardar Información" class="btn btn-primary px-4" />
@@ -180,6 +206,8 @@
         <i class="fas fa-arrow-left"></i> Volver a Detalles del Reproductor
     </a>
 </div>
+
+@Html.Partial("_InfoModal")
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -49,7 +49,7 @@ namespace Sirep.Areas.Simulador.Library
             m_listaM = new List<Individuo>();
 
             m_NombreLocuses = new List<string>(); 
-            foreach (var numeroLocus in especieReproductor.NumerosLocuses)
+            foreach (var numeroLocus in especieReproductor.NumerosLocus)
                 m_NombreLocuses.Add("PL "+numeroLocus);
 
             m_numLocuses = m_NombreLocuses.Count();

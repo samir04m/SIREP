@@ -348,6 +348,9 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<int?>("BajaCalidad")
+                        .HasColumnType("int");
+
                     b.Property<string>("Branquias")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
@@ -356,6 +359,12 @@ namespace Sirep.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<double>("CSL")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("CantidadTotal")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ConcentracionADN")
                         .HasColumnType("float");
 
                     b.Property<double>("GLS")
@@ -372,6 +381,9 @@ namespace Sirep.Data.Migrations
 
                     b.Property<double>("HTOLab")
                         .HasColumnType("float");
+
+                    b.Property<int?>("NumeroRetenidas")
+                        .HasColumnType("int");
 
                     b.Property<string>("Observaciones")
                         .HasColumnType("nvarchar(100)")
@@ -410,6 +422,9 @@ namespace Sirep.Data.Migrations
 
                     b.Property<double>("Talla")
                         .HasColumnType("float");
+
+                    b.Property<int?>("TotalLecturas")
+                        .HasColumnType("int");
 
                     b.Property<double>("UREA")
                         .HasColumnType("float");

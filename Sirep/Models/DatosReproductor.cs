@@ -64,6 +64,21 @@ namespace Sirep.Models
         [StringLength(100)]
         public string Observaciones { get; set; }
 
+        [Display(Name = "Total Lecturas")]
+        public int? TotalLecturas { get; set; }
+
+        [Display(Name = "Retenidas")]
+        public int? NumeroRetenidas { get; set; }
+
+        [Display(Name = "Baja Calidad")]
+        public int? BajaCalidad { get; set; }
+
+        [Display(Name = "Concentración ADN")]
+        public double? ConcentracionADN { get; set; }
+
+        [Display(Name = "Cantidad Total")]
+        public double? CantidadTotal { get; set; }
+
         [ForeignKey("ReproductorId")]
         public virtual Reproductor Reproductor { get; set; }
     }

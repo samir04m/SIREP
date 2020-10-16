@@ -31,14 +31,14 @@ namespace Sirep.Library
                     List<ReproductorSimulador> listRS = new List<ReproductorSimulador>();
                     int numeroReproductoresValidos = 0;
 
-                    var numerosLocuses = GetNumerosLocuses(reproductores);
-                    if (numerosLocuses.Count() > 0)
+                    var numerosLocus = GetNumerosLocus(reproductores);
+                    if (numerosLocus.Count() > 0)
                     {
                         foreach (var rep in reproductores)
                         {
                             Dictionary<int, ValoresLocus> dictLocus = new Dictionary<int, ValoresLocus>();
                             bool estado = true;
-                            foreach (var numero in numerosLocuses)
+                            foreach (var numero in numerosLocus)
                             {
                                 var locus = rep.Locus.Where(z => z.Numero == numero).FirstOrDefault();
                                 var parLocus = new ValoresLocus();
@@ -78,7 +78,7 @@ namespace Sirep.Library
                     {
                         Centro = centro,
                         Especie = especie,
-                        NumerosLocuses = numerosLocuses,
+                        NumerosLocus = numerosLocus,
                         Reproductores = listRS,
                         NumeroReproductoresValidos = numeroReproductoresValidos
                     };
@@ -90,7 +90,7 @@ namespace Sirep.Library
             return list;
         }
 
-        public List<int> GetNumerosLocuses(List<Reproductor> reproductores)
+        public List<int> GetNumerosLocus(List<Reproductor> reproductores)
         {
             List<int> list = new List<int>();
 

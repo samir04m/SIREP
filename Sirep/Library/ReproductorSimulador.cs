@@ -25,7 +25,7 @@ namespace Sirep.Library
     {
         public Centro Centro;
         public Especie Especie;
-        public List<int> NumerosLocuses;
+        public List<int> NumerosLocus;
         public List<ReproductorSimulador> Reproductores;
         public int NumeroReproductoresValidos;
     }

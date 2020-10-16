@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sirep.Data.Migrations
 {
-    public partial class DesdeCero : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -347,7 +347,12 @@ namespace Sirep.Data.Migrations
                     Piel = table.Column<string>(maxLength: 100, nullable: true),
                     Aleta = table.Column<string>(maxLength: 100, nullable: true),
                     Branquias = table.Column<string>(maxLength: 100, nullable: true),
-                    Observaciones = table.Column<string>(maxLength: 100, nullable: true)
+                    Observaciones = table.Column<string>(maxLength: 100, nullable: true),
+                    TotalLecturas = table.Column<int>(nullable: true),
+                    NumeroRetenidas = table.Column<int>(nullable: true),
+                    BajaCalidad = table.Column<int>(nullable: true),
+                    ConcentracionADN = table.Column<double>(nullable: true),
+                    CantidadTotal = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
