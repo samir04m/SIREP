@@ -5,62 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2> Gestión de Lotes (@Model.Nombre)</h2>
+<h3>@Model.Nombre</h3>
 <hr />
 <div class="row">
-    <div class="col-md-12 col-lg-7 mb-4">
-        <h4 class="mt-4 mb-3 text-center">
-            Lista de Lotes
-            <a class="btn btn-primary mx-3" asp-action="Create" asp-route-id="@Model.Id">
-                <i class="fas fa-user-plus"></i> Agregar Lote
-            </a>
-        </h4>
+    <div class="col-md-12 col-lg-8 mb-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="mb-3 text-center">
+                    Lista de Lotes
+                    <a class="btn btn-primary mx-3" asp-action="Create" asp-route-id="@Model.Id">
+                        <i class="fas fa-user-plus"></i> Agregar Lote
+                    </a>
+                </h4>
 
-        <div class="table-responsive">
-            <table class="table table-hover" id="mytable">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Lotes)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
-                                    <i class="far fa-eye"></i>
-                                </a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                @if (item.Reproductores.Count() > 0)
-                                {
-                                    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="popover" title="No se puede eliminar"
-                                            data-content="No es posible eliminar este registro porque esta relacionado con @item.Reproductores.Count() Reproductores.">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                }
-                                else
-                                {
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="mytable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Lotes)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success btn-sm">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        @if (item.Reproductores.Count() > 0)
+                                        {
+                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="popover" title="No se puede eliminar"
+                                                    data-content="No es posible eliminar este registro porque esta relacionado con @item.Reproductores.Count() Reproductores.">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+        
     </div>
-    <div class="col-md-12 offset-lg-1 col-lg-4">
+    <div class="col-md-12 col-lg-4">
         <div class="card mb-4 shadow">
-            <h5 class="card-header text-center">Reproductores del Centro</h5>
+            <h6 class="card-header text-center text-light bg-primary">Reproductores del Centro</h6>
             <div class="card-body">
                 <h6>Cantidad de Reproductores: <span class="badge badge-primary">@ViewBag.cantidadReproductores</span></h6>
                 <div class="text-center mt-4">
@@ -73,11 +78,25 @@
 
         @if (ViewBag.cantidadReproductores >= 4)
         {
-            <a href="/Simulador/Centro/@Model.Id" class="btn btn-block btn-outline-info py-2 shadow">Ir al Simulador de Cruces</a>
+            <div class="card shadow">
+                <h6 class="card-header text-center bg-info text-light">Simulador de Cruces</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="/Simulador/Centro/@Model.Id">
+                            <i class="fas fa-dna mr-3"></i> Ir al Simulador de Cruces
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/Simulador/Informes/@Model.Id">
+                            <i class="fas fa-list-ol mr-3"></i> Ver el Registro de Informes
+                        </a>
+                    </li>
+                </ul>
+            </div>
         }
     </div>
 </div>
 
-<div class="text-center mt-5">
+<div class="text-center mt-3">
     <a href="/Centro/Inicio" class="btn btn-outline-secondary rounded-pill"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
 </div>

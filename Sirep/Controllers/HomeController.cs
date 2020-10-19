@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Sirep.Data;
 using Sirep.Models;
 
 namespace Sirep.Controllers
@@ -15,14 +17,34 @@ namespace Sirep.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         IServiceProvider _serviceProvider;
+        private ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, IServiceProvider serviceProvider)
+        public HomeController(ILogger<HomeController> logger, IServiceProvider serviceProvider,
+                                ApplicationDbContext context)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
+            _context = context;
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult InfoCentros()
+        {
+            var centros = _context.Centros.Include("Departamento").ToList();
+            return View(centros);
+        }
+
+        public IActionResult InfoEspecies()
+        {
+            var especies = _context.Especies.ToList().OrderBy(x=>x.NombreComun);
+            return View(especies);
+        }
+
+        public IActionResult Agradecimientos()
         {
             return View();
         }

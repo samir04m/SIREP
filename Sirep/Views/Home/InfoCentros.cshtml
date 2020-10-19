@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Sirep.Models.Centro>
+@{
+    ViewData["Title"] = "Centros Piscícolas";
+    var collapsed = "";
+    var ariaExpanded = "true";
+    var show = "show";
+}
+
+<h2 class="text-center">Centros Piscícolas</h2>
+<hr />
+
+<div class="accordion" id="accordionCentros">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-header" id="@String.Concat("centro", item.Id)">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left @collapsed" type="button" data-toggle="collapse" data-target="#@String.Concat("collase", item.Id)" 
+                            aria-expanded="@ariaExpanded" aria-controls="@String.Concat("collase", item.Id)">
+                        @item.Nombre
+                    </button>
+                </h2>
+            </div>
+
+            <div id="@String.Concat("collase", item.Id)" class="collapse @show" aria-labelledby="@String.Concat("centro", item.Id)" data-parent="#accordionCentros">
+                <div class="card-body">
+                    <h6>Ubicación:</h6>
+                    <p class="pb-3">@item.Direccion (@item.Lugar, @item.Departamento.Nombre)</p>
+
+                    <h6>Información del Centro:</h6>
+                    <p class="text-justify">@item.Informacion</p>
+                </div>
+            </div>
+        </div>
+        collapsed = "collapsed";
+        ariaExpanded = "false";
+        show = "";
+    }
+    
+</div>

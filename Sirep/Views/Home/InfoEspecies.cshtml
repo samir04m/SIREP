@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Sirep.Models.Especie>
+@{
+    ViewData["Title"] = "Centros Piscícolas";
+    var active = "active";
+    var showActive = "show active";
+}
+
+<h2 class="text-center">Listado de Especies</h2>
+<hr />
+
+<div class="row">
+    <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+            @foreach (var item in Model)
+            {
+                <a class="list-group-item list-group-item-action @active" id="list-@item.Id-list" data-toggle="list" href="#list-@item.Id" role="tab" aria-controls="@item.Id">
+                    <b>@item.NombreComun</b> (<i>@item.Nombre</i>)
+                </a>
+                active = "";
+            }
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+            @foreach (var item in Model)
+            {
+                <div class="tab-pane fade @showActive" id="list-@item.Id" role="tabpanel" aria-labelledby="list-@item.Id-list">
+                    <dl class="row fz-20 lh-2 pl-5">
+                        <dt class="col-4">
+                            @Html.DisplayNameFor(item => item.Nombre)
+                        </dt>
+                        <dd class="col-8">
+                            @item.Nombre
+                        </dd>
+                        <dt class="col-4">
+                            @Html.DisplayNameFor(item => item.NombreComun)
+                        </dt>
+                        <dd class="col-8">
+                            @item.NombreComun
+                        </dd>
+                        <dt class="col-4">
+                            @Html.DisplayNameFor(item => item.Familia)
+                        </dt>
+                        <dd class="col-8">
+                            @item.Familia
+                        </dd>
+                        <dt class="col-4">
+                            @Html.DisplayNameFor(item => item.Orden)
+                        </dt>
+                        <dd class="col-8">
+                            @item.Orden
+                        </dd>
+                    </dl>
+                </div>
+                showActive = "";
+            }
+        </div>
+    </div>
+</div>
