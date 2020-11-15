@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label asp-for="Input.NID"></label>
-                            <input asp-for="Input.NID" placeholder="Número de documento" class="form-control" autofocus />
+                            <input asp-for="Input.NID" placeholder="Número de documento" class="form-control" />
                             <span asp-validation-for="Input.NID" class="text-danger"></span>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.Email"></label>
-                        <input asp-for="Input.Email" placeholder="Correo electrónico" class="form-control" />
+                        <input asp-for="Input.Email" placeholder="Correo electrónico" class="form-control" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     @if (Model.Input.Id.Equals(0))
@@ -56,7 +56,7 @@
                         <label asp-for="Input.Role"></label>
                         @if (Model.Input.Id.Equals(0))
                         {
-                            @Html.DropDownList("Input.Role", new SelectList(Model.Input.rolesLista, "Text", "Text"), "Seleccione un role", new { @class = "form-control" })
+                            @Html.DropDownList("Input.Role", new SelectList(Model.Input.rolesLista, "Text", "Text"), "Seleccione un rol", new { @class = "form-control" })
                         }
                         else
                         {
